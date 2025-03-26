@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="school_subject" model="subject" >
+            <field name="name">Basic Science I</field>
+            <field name="department_id" ref="school_department"/>
+        </record>
+</odoo>

@@ -1,0 +1,29 @@
+<odoo>
+   <data>
+       <record id="event_reminder_email" model="mail.template">
+           <field name="name">Event Reminder Email</field>
+           <field name="model_id" ref="model_school_event"/>
+           <field name="subject">Reminder</field>
+<!--           <field name="email_from">{{ 'self.user_id.email'}}</field>-->
+<!--           <field name="email_to">{{'self.partner_ids.email'}}</field>-->
+           <field name="description">Add Description</field>
+           <field name="body_html" type="html">
+               <div>
+                   <p>
+                       Hey....Hello!!!
+                       <br/>
+                       <br/>
+                       This is a reminder for you!
+                       your event has scheduled Day after tomorrow
+                       Don't miss the event!!!!
+                       <br/>
+                       <br/>
+                       <br/>San Deo
+                       <br/>
+                       <br/>
+                   </p>
+               </div>
+           </field>
+       </record>
+   </data>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <menuitem
+      id="school_menu_root"
+      name ="School Management"
+      action ="school_student_action"/>
+
+  <menuitem
+      id ="school_menu_student"
+      name="Students"
+      parent = "school_menu_root"
+      action ="school_student_action"/>
+
+  <menuitem
+      id ="school_menu_student_reg"
+      name="Registration"
+      parent = "school_menu_student"
+      action ="school_student_action"/>
+
+  <menuitem
+      id ="school_menu_configuration"
+      name="Configuration"
+      parent = "school_menu_root"
+      action ="school_department_action"/>
+
+  <menuitem
+      id ="school_menu_configuration_dept"
+      name="Department"
+      parent="school_menu_configuration"
+      action ="school_department_action"/>
+
+  <menuitem
+      id ="school_menu_configuration_cls"
+      name="Class"
+      parent = "school_menu_configuration"
+      action ="school_class_action"/>
+
+  <menuitem
+      id ="school_menu_configuration_sub"
+      name="Subject"
+      parent = "school_menu_configuration"
+      action ="school_subject_action"/>
+
+  <menuitem
+      id ="school_menu_configuration_year"
+      name="Academic Year"
+      parent = "school_menu_configuration"
+      action ="school_academic_year_action"/>
+
+  <menuitem
+      id ="school_menu_club"
+      name="Clubs"
+      parent = "school_menu_root"
+      action ="school_club_action"/>
+
+  <menuitem
+      id ="school_menu_event"
+      name="Events"
+      parent = "school_menu_root"
+      action ="school_event_action"/>
+
+  <menuitem
+      id = "school_menu_employee"
+      name = "Employees"
+      parent = "school_menu_root"
+      action ="school_teacher_action"/>
+
+  <menuitem
+      id = "school_menu_employee_teacher"
+      name = "Teachers"
+      parent = "school_menu_employee"
+      action ="school_teacher_action"/>
+
+  <menuitem
+      id = "school_menu_employee_staff"
+      name = "Office Staffs"
+      parent = "school_menu_employee"
+      action ="school_staff_action"/>
+  <menuitem
+      id = "school_menu_leaves"
+      name = "Leaves"
+      parent = "school_menu_root"
+      action ="school_leave_action"/>
+
+  <menuitem
+      id = "school_menu_exam"
+      name = "Exams"
+      parent = "school_menu_root"
+      action ="school_exam_action"/>
+</odoo>

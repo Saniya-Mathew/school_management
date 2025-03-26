@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="leave_view_list" model="ir.ui.view">
+        <field name="name">Leaves</field>
+        <field name="model">school.leave</field>
+        <field name ="arch" type="xml">
+            <list>
+                <field name = "student_id"/>
+                <field name = "date_from"/>
+                <field name = "date_to"/>
+                <field name = "total_day"/>
+                <field name = "half_day" optional="hide"/>
+                <field name = "reason" optional="hide"/>
+<!--                <field name ="attendance" optional="hide"/>-->
+            </list>
+        </field>
+    </record>
+    <record id="leave_view_form" model ="ir.ui.view">
+        <field name ="name">view_leave_form</field>
+        <field name = "model">school.leave</field>
+        <field name ="arch" type="xml">
+            <form string="leave">
+                <sheet>
+                    <group>
+                    <group>
+                        <field name = "student_id"/>
+                        <field name = "stu_class"/>
+                        <field name = "half_day"/>
+                    </group>
+                    <group>
+                        <field name = "date_from"/>
+                        <field name = "date_to"/>
+                        <field name = "total_day"/>
+                    </group>
+                        <field name = "reason"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+     <record id="school_leave_action" model="ir.actions.act_window">
+        <field name="name">Leaves</field>
+        <field name="res_model">school.leave</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

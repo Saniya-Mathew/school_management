@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="event_view_list" model="ir.ui.view">
+        <field name="name">Events</field>
+        <field name="model">school.event</field>
+        <field name ="arch" type="xml">
+            <list>
+                <field name = "name"/>
+                <field name = "club_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="event_view_form" model ="ir.ui.view">
+        <field name ="name">view_event_form</field>
+        <field name = "model">school.event</field>
+        <field name ="arch" type="xml">
+            <form string="event">
+                <header>
+               <button name="action_send_mail" type="object"
+                       string="Send Email" class="oe_highlight"/>
+           </header>
+            <sheet>
+                 <group>
+                     <field name="name"/>
+                     <field name="club_id"/>
+                     <field name = "event_date"/>
+                     <field name="active" invisible="1"/>
+<!--                             eval="[('event_date', '<', 'datetime.today()')]"/>-->
+                </group>
+        </sheet>
+                <chatter/>
+        </form>
+        </field>
+    </record>
+    <record id="model_id_view_search" model="ir.ui.view">
+        <field name="name">model.id.view.search</field>
+        <field name="model">school.event</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Archived" name="active" domain="[('active', '=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="school_event_action" model="ir.actions.act_window">
+        <field name="name">Event</field>
+        <field name="res_model">school.event</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

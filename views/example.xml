@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="example_line_view_list" model="ir.ui.view">
+        <field name="name">Example</field>
+        <field name="model">example.line</field>
+        <field name ="arch" type="xml">
+            <list>
+                <field name = "product_id"/>
+                <field name = "qty"/>
+                <field name = "price"/>
+                <field name = "sub_total"/>
+                <field name = "example_id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

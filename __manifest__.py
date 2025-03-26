@@ -1,0 +1,43 @@
+{
+    'name': "School Management",
+    'version': '1.0',
+    'depends': ['base','mail','sale'],
+    'author': "San",
+    'category': 'Category',
+    'description': """
+    Description text
+    """,
+    # data files always loaded at installation
+    'data': [
+        'security/school_user_groups.xml',
+        'security/school_security.xml',
+        'security/ir.model.access.csv',
+        'data/school_department_data.xml',
+        'data/school_class_data.xml',
+        'data/school_subject_data.xml',
+        'data/ir_sequence_data.xml',
+        'data/mail_tempalate_data.xml',
+        'data/ir_cron_data.xml',
+        'data/ir_action_data.xml',
+        # 'views/school_user_groups_view.xml',
+        'views/sale_order_view.xml',
+        'views/registration_view.xml',
+        'views/department_view.xml',
+        'views/class_view.xml',
+        'views/subject_view.xml',
+        'views/academic_year_view.xml',
+        'views/club_view.xml',
+        'views/event_view.xml',
+        'views/school_teacher_view.xml',
+        'views/school_leave_views.xml',
+        'views/school_exam_view.xml',
+        'views/school_management_menu.xml'
+
+    ],
+    'license': 'LGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+    'sequence': 1,
+
+}

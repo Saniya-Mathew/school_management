@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+      <record id="action_create_user_on_registration_done" model="ir.actions.server">
+        <field name="name">Create user from student registration</field>
+        <field name="model_id" ref="school.model_student_registration"/>
+        <field name="state">code</field>
+        <field name="code">action=record.create_user()</field>
+    </record>
+    <record id="test_rule_on_create" model="base.automation">
+            <field name="name">Create user from student registration</field>
+            <field name="model_id" ref="school.model_student_registration"/>
+            <field name="trigger">on_create</field>
+            <field name="action_server_ids" eval="[(Command.link(ref('action_create_user_on_registration_done')))]"/>
+    </record>
+<!--     <record id="my_action" model="ir.actions.server">-->
+<!--        <field name="groups_id" eval="[(Command.link(ref('school.my_module_group')))]"/>-->
+<!--    </record>-->
+</odoo>

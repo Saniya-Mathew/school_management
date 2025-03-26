@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_send_event_reminder" model="ir.cron">
+            <field name="name">Event reminder Email</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="model_id" ref="model_school_event"/>
+            <field name="state">code</field>
+            <field name="code">model.send_email()</field>
+        </record>
+        <record id="ir_update_attendance" model="ir.cron">
+            <field name="name">Update Attendance</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="model_id" ref="model_student_registration"/>
+            <field name="state">code</field>
+            <field name="code">model.update_attendance()</field>
+        </record>
+    </data>
+</odoo>

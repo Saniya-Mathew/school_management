@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="exam_view_list" model="ir.ui.view">
+    <field name="name">Exams</field>
+    <field name="model">school.exam</field>
+    <field name ="arch" type="xml">
+        <list>
+            <field name = "name"/>
+            <field name = "exm_class_id"/>
+            <field name = "paper"/>
+        </list>
+    </field>
+</record>
+<record id="exam_view_form" model ="ir.ui.view">
+    <field name ="name">view_exam_form</field>
+    <field name = "model">school.exam</field>
+    <field name ="arch" type="xml">
+        <form string="Exam">
+            <header>
+                <button name ="action_add_exam" string="Add Exam" type="object"
+                                class="oe_highlight" />
+            </header>
+            <sheet>
+                    <group>
+                        <field name = "name"/>
+                        <field name = "exm_class_id"/>
+                    </group>
+                 <notebook>
+                    <page name="public" string="students">
+                        <div id="exam_details">
+                                    <field name ="stu_ids"/>
+                        </div>
+                    </page>
+                     <page name="public" string="papers">
+                        <div id="sub_details">
+                            <field name = "paper"/>
+                        </div>
+                    </page>
+                 </notebook>
+            </sheet>
+            <chatter/>
+        </form>
+    </field>
+</record>
+    <record id="school_exam_action" model="ir.actions.act_window">
+        <field name="name">Exams</field>
+        <field name="res_model">school.exam</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
