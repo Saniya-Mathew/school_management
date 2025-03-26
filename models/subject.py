@@ -8,6 +8,7 @@ class Subject(models.Model):
     _description = "Subject"
     _inherit = 'mail.thread'
 
+    #ljkkkljkjlgjkjmlkjjmlkjmkjhjmn
     name = fields.Char(string="Name of the Subject")
     department_id= fields.Many2one('department',string="Department")
     pass_mark = fields.Integer(string="Passmark")
