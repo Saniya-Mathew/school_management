@@ -53,7 +53,7 @@
                             <field name="l_name"/>
                             <field name="father"/>
                             <field name="mother"/>
-                            <field name="company_id"/>
+                            <field name="company_id" />
                             <field name = "club_ids" widget="many2many_tags"/>
                             <field name="class_id"/>
                             <field name ="attendance"/>

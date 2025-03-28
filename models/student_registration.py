@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from email.policy import default
+
 from reportlab.graphics.transform import inverse
 from odoo import api, fields, models, _
 from odoo.addons.test_convert.tests.test_env import record
@@ -36,11 +38,13 @@ class StudentRegistration(models.Model):
     photo = fields.Binary("Passport size photo", attachment=True,
                                     help="This field holds the image used for registration")
     previous_dept_id =fields.Many2one('department',string='Previous academic department')
-    previous_class_id = fields.Many2one( 'class',string="Previous Class",domain="[('cls_department_id','=',previous_dept_id)]")
+    previous_class_id = fields.Many2one( 'class',string="Previous Class",
+                                         domain="[('cls_department_id','=',previous_dept_id)]")
     tc = fields.Binary(string="TC" )
     state = fields.Selection(selection=[('draft', 'Draft'),
                                         ('registered', 'Registered')], default="draft", track_visibility='onchange')
-    company_id = fields.Many2one('res.company', string='School')
+    company_id = fields.Many2one('res.company', string='School',default=lambda self: self.env.company.id,
+                                 domain=lambda self:[('id', '=', self.env.company.id)])
     age = fields.Integer(string="Age", compute="_compute_age", store=True)
     club_ids = fields.Many2many('school.club', string='Club')
     exam_ids = fields.Many2many('school.exam',string="Exams")
@@ -57,13 +61,13 @@ class StudentRegistration(models.Model):
          'Choose another value - Aadhar_number is already exist!!!')
     ]
 
-    @api.model_create_multi
-    def create(self, vals_list):
+    @api.model
+    def create(self, vals):
         """ Create a sequence for the student model """
-        for vals in vals_list:
-            if vals.get('reg_no', _('New')) == _('New'):
-                vals['reg_no'] = (self.env['ir.sequence'].next_by_code('student.registration'))
-        return super().create(vals_list)
+        if vals.get('reg_no', _('New')) == _('New'):
+            vals['reg_no'] = (self.env['ir.sequence'].next_by_code('student.registration'))
+            print(vals['reg_no'])
+        return super().create(vals)
 
     @api.constrains('email')
     def _check_email(self):
@@ -77,6 +81,7 @@ class StudentRegistration(models.Model):
 
     def action_registered(self):
         """  defining button action  """
+        # print(self.reg_no)
         self.write({'state': 'registered'})
 
 
