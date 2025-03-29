@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-from email.policy import default
-
-from reportlab.graphics.transform import inverse
 from odoo import api, fields, models, _
-from odoo.addons.test_convert.tests.test_env import record
 from odoo.exceptions import ValidationError
 import re
 from datetime import datetime,date

@@ -12,7 +12,4 @@
             <field name="trigger">on_create</field>
             <field name="action_server_ids" eval="[(Command.link(ref('action_create_user_on_registration_done')))]"/>
     </record>
-<!--     <record id="my_action" model="ir.actions.server">-->
-<!--        <field name="groups_id" eval="[(Command.link(ref('school.my_module_group')))]"/>-->
-<!--    </record>-->
 </odoo>
