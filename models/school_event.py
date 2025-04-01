@@ -47,4 +47,3 @@ class SchoolEvent(models.Model):
                     for partner in partner_ids:
                         template.send_mail(self.id, force_send=True,
                                    email_values={'email_from': 'self.user_id.email','email_to': partner.email})
-

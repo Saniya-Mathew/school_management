@@ -2,12 +2,12 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 import re
-from datetime import datetime,date
+from datetime import date
 from dateutil.relativedelta import relativedelta
 
 
 class StudentRegistration(models.Model):
-    """"Shows all the information related to student registration"""
+    """Shows all the information related to student registration"""
     _name = "student.registration"
     _description = "Student Registration"
     _rec_name = 'f_name'
@@ -62,7 +62,6 @@ class StudentRegistration(models.Model):
         """ Create a sequence for the student model """
         if vals.get('reg_no', _('New')) == _('New'):
             vals['reg_no'] = (self.env['ir.sequence'].next_by_code('student.registration'))
-            print(vals['reg_no'])
         return super().create(vals)
 
     @api.constrains('email')
@@ -77,7 +76,6 @@ class StudentRegistration(models.Model):
 
     def action_registered(self):
         """  defining button action  """
-        # print(self.reg_no)
         self.write({'state': 'registered'})
 
 
@@ -105,7 +103,6 @@ class StudentRegistration(models.Model):
     @api.model
     def create_user(self):
         """creating new user from each student registration"""
-        # print(self)
         user_vals = {
             'name': self.f_name,
             'email': self.email,
