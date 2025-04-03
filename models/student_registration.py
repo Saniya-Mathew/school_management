@@ -2,12 +2,12 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 import re
-from datetime import date
+from datetime import datetime,date
 from dateutil.relativedelta import relativedelta
 
 
 class StudentRegistration(models.Model):
-    """Shows all the information related to student registration"""
+    """"Shows all the information related to student registration"""
     _name = "student.registration"
     _description = "Student Registration"
     _rec_name = 'f_name'

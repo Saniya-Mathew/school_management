@@ -38,3 +38,5 @@ access_school_leave_teacher,access.school.leave,model_school_leave,school_teache
 access_school_exam,access.school.exam,model_school_exam,school_staff_group,1,1,1,1
 access_school_exam_student,access.school.exam,model_school_exam,school_student_group,1,0,0,0
 access_school_exam_teacher,access.school.exam,model_school_exam,school_teacher_group,1,0,1,0
+
+access_student_leave_inform,access.student.leave.inform,model_student_leave_inform,school_staff_group,1,1,1,1

@@ -38,6 +38,17 @@
             </form>
         </field>
     </record>
+    <record id="school_student_search" model="ir.ui.view">
+        <field name="name">student.leave.search</field>
+        <field name="model">school.leave</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name = "date_from"/>
+                <field name = "date_to"/>
+            </search>
+        </field>
+    </record>
+
      <record id="school_leave_action" model="ir.actions.act_window">
         <field name="name">Leaves</field>
         <field name="res_model">school.leave</field>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="action_report_student_leave" model="ir.actions.report">
+       <field name="name">student leave</field>
+       <field name="model">school.leave</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">school.report_student</field>
+       <field name="report_file">school.report_student</field>
+       <field name="binding_model_id" ref="school.model_school_leave"/>
+       <field name="binding_type">report</field>
+   </record>
+</odoo>
