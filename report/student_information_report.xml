@@ -20,7 +20,7 @@
                                     <t t-if="data.get('report')">
                                         <t t-foreach="data.get('report')" t-as="row">
                                             <tr>
-                                                <td><t t-esc="row[0]"/></td> <!-- Student Name -->
+                                                 <td><t t-esc="row[0]"/></td> <!-- Student Name -->
                                                 <td><t t-esc="row[1]"/></td> <!-- Class Name -->
                                                 <td><t t-esc="row[2]"/></td> <!-- Leave Date -->
 <!--                                                <td><t t-esc="row[3]"/></td> &lt;!&ndash; Reason &ndash;&gt;-->
