@@ -92,16 +92,16 @@
       id = "school_menu_reports"
       name = "Reporting"
       parent = "school_menu_root"
-      action ="student_information_action"/>
+      action ="leave_information_action"/>
 
   <menuitem
       id = "school_menu_leave_report"
       name = "Leave Information"
       parent = "school_menu_reports"
-      action ="student_information_action"/>
+      action ="leave_information_action"/>
   <menuitem
       id = "school_menu_student_report"
       name = "Student Information"
       parent = "school_menu_reports"
-      action ="school_exam_action"/>
+      action ="student_information_action"/>
 </odoo>

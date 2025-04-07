@@ -50,6 +50,7 @@ class StudentRegistration(models.Model):
                                              ('absent', 'Absent'), ])
 
     stu_ids = fields.One2many('school.leave', 'student_id', string='Students')
+    dept_id = fields.Many2one('department',string='Department')
 
     _sql_constraints = [
         ('field_unique',

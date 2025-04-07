@@ -9,4 +9,13 @@
        <field name="binding_model_id" ref="school.model_school_leave"/>
        <field name="binding_type">report</field>
    </record>
+      <record id="action_report_student" model="ir.actions.report">
+       <field name="name">student information</field>
+       <field name="model">student.registration</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">school.report_student_inform</field>
+       <field name="report_file">school.report_student_inform</field>
+       <field name="binding_model_id" ref="school.model_student_registration"/>
+       <field name="binding_type">report</field>
+   </record>
 </odoo>

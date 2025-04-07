@@ -2,19 +2,16 @@
 <odoo>
     <record id="student_inform_wizard_form" model="ir.ui.view">
         <field name="name">student.inform.form</field>
-        <field name="model">student.inform.inform</field>
+        <field name="model">student.inform</field>
         <field name="arch" type="xml">
-            <form string="student leave">
+            <form string="student inform">
                 <group>
-                    <field name="student_id"/>
                     <field name = "class_id"/>
                     <field name = "dept_id"/>
-                    <field name="filter_by"/>
-                    <field name="date_from" invisible="filter_by != 'custom'"/>
-                    <field name="date_to" invisible="filter_by != 'custom'"/>
+                    <field name="club_id"/>
                 </group>
                 <footer>
-                   <button name="action_print_report" string="print" type="object"/>
+                   <button name="action_student_report" string="print" type="object"/>
                    <button name="cancel" string="Cancel" special="cancel"/>
                </footer>
             </form>
@@ -22,12 +19,11 @@
     </record>
 
     <record id="student_information_action" model="ir.actions.act_window">
-        <field name="name">Student Leave Information</field>
+        <field name="name">Student Information</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">student.leave.inform</field>
+        <field name="res_model">student.inform</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="student_leave_wizard_form"/>
-        <field name="search_view_id" ref="school_student_search"/>
+        <field name="view_id" ref="student_inform_wizard_form"/>
         <field name="target">new</field>
     </record>
 </odoo>

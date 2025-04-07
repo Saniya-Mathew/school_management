@@ -40,3 +40,4 @@ access_school_exam_student,access.school.exam,model_school_exam,school_student_g
 access_school_exam_teacher,access.school.exam,model_school_exam,school_teacher_group,1,0,1,0
 
 access_student_leave_inform,access.student.leave.inform,model_student_leave_inform,school_staff_group,1,1,1,1
+access_student_inform,access.student.inform,model_student_inform,school_staff_group,1,1,1,1

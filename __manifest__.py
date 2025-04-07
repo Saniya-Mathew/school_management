@@ -31,9 +31,11 @@
         'views/school_leave_views.xml',
         'views/school_exam_view.xml',
         'views/school_management_menu.xml',
+        'wizard/student_inform.xml',
         'wizard/student_leave.xml',
         'report/ir_actions_report.xml',
-        'report/student_information_report.xml',
+        'report/leave_report_template.xml',
+        'report/student_report_template.xml'
 
     ],
     'license': 'LGPL-3',

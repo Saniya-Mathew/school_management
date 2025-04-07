@@ -1,1 +1,2 @@
-from . import student_repoort
+from . import leave_report
+from . import student_report
