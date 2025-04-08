@@ -6,21 +6,29 @@
                <div class="page">
                    <div class="oe_structure">
                         <h2 style="text-align: center;">Student leave Report </h2>
-                        <table class="table table-condensed">
+                       <h5> Student Name:
+                           <t t-out ="data.get('student_id')"/></h5>
+                        <table class="table table-border">
                             <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>Date_from</th>
-                                    <th>Date_to</th>
+                                    <th>class</th>
+                                    <th>Reg No</th>
+                                    <th>Date From</th>
+                                    <th>Date To</th>
+                                    <th>Reason</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-if="data.get('report')">
                                     <t t-foreach="data.get('report')" t-as="row">
                                         <tr>
-                                             <td><t t-esc="row[0]"/></td>
-                                            <td><t t-esc="row[1]"/></td>
-                                            <td><t t-esc="row[2]"/></td>
+                                            <td><t t-esc="row.get('f_name')"/></td>
+                                            <td><t t-esc="row.get('class_id')"/></td>
+                                            <td><t t-esc="row.get('reg_no')"/></td>
+                                            <td><t t-esc="row.get('date_from')"/></td>
+                                            <td><t t-esc="row.get('date_to')"/></td>
+                                            <td><t t-esc="row.get('reason')"/></td>
                                         </tr>
                                     </t>
                                 </t>

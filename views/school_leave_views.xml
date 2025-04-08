@@ -20,7 +20,7 @@
         <field name ="arch" type="xml">
             <form string="leave">
                 <sheet>
-                    <group>
+
                     <group>
                         <field name = "student_id"/>
                         <field name = "stu_class"/>
@@ -30,7 +30,6 @@
                         <field name = "date_from"/>
                         <field name = "date_to"/>
                         <field name = "total_day"/>
-                    </group>
                         <field name = "reason"/>
                     </group>
                 </sheet>
