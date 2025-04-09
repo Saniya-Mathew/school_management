@@ -10,7 +10,7 @@
                     <field name="date_from" invisible="filter_by != 'custom'"/>
                     <field name="date_to" invisible="filter_by != 'custom'"/>
                     <field name = "class_id"/>
-                    <field name="student_id"/>
+                    <field name="student_ids" widget="many2many_tags"/>
                 </group>
                 <footer>
                    <button name="action_print_report" string="Print" type="object"/>

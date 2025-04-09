@@ -6,14 +6,46 @@
                <div class="page">
                    <div class="oe_structure">
                         <h2 style="text-align: center;">Student leave Report </h2>
-                       <h5> Student Name:
-                           <t t-out ="data.get('student_id')"/></h5>
+<!--                       <t t-foreach="data.get('student name')" t-as="o">-->
+                       <t t-if="data.get('student name')">
+                                <p> Student Name:
+                                    <t t-out ="data.get('student name')"/>
+                                </p>
+<!--                           </t>-->
+                           </t>
+                       <t t-if="data.get('class_id')">
+                            <p> Class:
+                                <t t-out ="data.get('class_id')"/>
+                            </p>
+                       </t>
+                       <t t-if="data.get('filter')">
+                            <p>Filter by:
+                                <t t-out = "data.get('filter')"/>
+                            </p>
+                       </t>
+                       <t t-if="data.get('date from')">
+                            <p>Date from:
+                                <t t-out = "data.get('date from')"/>
+                            </p>
+                       </t>
+                       <t t-if="data.get('date to')">
+                            <p>Date To:
+                                <t t-out = "data.get('date to')"/>
+                            </p>
+                       </t>
                         <table class="table table-border">
                             <thead>
                                 <tr>
-                                    <th>Student Name</th>
-                                    <th>class</th>
-                                    <th>Reg No</th>
+                                     <th>Sl.No</th>
+                                    <t t-if="not data.get('student name')">
+                                        <th>Student Name</th>
+                                    </t>
+                                    <t t-if="not data.get('class_id')">
+                                        <th>class</th>
+                                    </t>
+                                    <t t-if="not data.get('student name')">
+                                        <th>Reg No</th>
+                                    </t>
                                     <th>Date From</th>
                                     <th>Date To</th>
                                     <th>Reason</th>
@@ -23,9 +55,16 @@
                                 <t t-if="data.get('report')">
                                     <t t-foreach="data.get('report')" t-as="row">
                                         <tr>
-                                            <td><t t-esc="row.get('f_name')"/></td>
-                                            <td><t t-esc="row.get('class_id')"/></td>
-                                            <td><t t-esc="row.get('reg_no')"/></td>
+                                            <td><t t-esc="row_index + 1"/></td>
+                                            <t t-if="not data.get('student name')">
+                                                <td><t t-esc="row.get('f_name')"/></td>
+                                            </t>
+                                            <t t-if="not data.get('class_id')">
+                                                <td><t t-esc="row.get('class_id')"/></td>
+                                            </t>
+                                            <t t-if="not data.get('student name')">
+                                                <td><t t-esc="row.get('reg_no')"/></td>
+                                            </t>
                                             <td><t t-esc="row.get('date_from')"/></td>
                                             <td><t t-esc="row.get('date_to')"/></td>
                                             <td><t t-esc="row.get('reason')"/></td>

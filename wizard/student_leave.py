@@ -8,7 +8,7 @@ class StudentLeaveInform(models.TransientModel):
     _name = "student.leave.inform"
     _description = "Student Report"
 
-    student_id = fields.Many2one('student.registration', string='Student',
+    student_ids = fields.Many2many('student.registration', string='Student',
                                  domain="[('class_id','=',class_id)]")
     class_id = fields.Many2one('class', string="Class")
     filter_by = fields.Selection(string='Filter by',
@@ -36,8 +36,8 @@ class StudentLeaveInform(models.TransientModel):
             where_clause.append("l.date_from = CURRENT_DATE")
         if self.filter_by == 'custom' and self.date_from and self.date_to:
               where_clause.append("l.date_from >= '%s' AND l.date_to <= '%s'" % (self.date_from, self.date_to))
-        if self.student_id:
-            where_clause.append("l.student_id = '%s'" %( self.student_id.id))
+        if self.student_ids:
+            where_clause.append("l.student_id in (%s)" % str( self.student_ids.ids)[1:-1])
         if self.class_id:
                 where_clause.append("s.class_id = '%s'" % (self.class_id.id))
         if where_clause:
@@ -46,7 +46,11 @@ class StudentLeaveInform(models.TransientModel):
         self.env.cr.execute(query)
         report = self.env.cr.dictfetchall()
         data ={
-            'student_id':self.student_id.f_name,
+            'student name':self.student_ids.f_name,
+            'class_id':self.class_id.id,
+            'filter':self.filter_by,
+            'date from':self.date_from ,
+            'date to':self.date_to,
              'report': report
         }
         return self.env.ref('school.action_report_student_leave').report_action(self,data=data)

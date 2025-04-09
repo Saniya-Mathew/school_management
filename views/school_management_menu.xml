@@ -18,6 +18,65 @@
       action ="school_student_action"/>
 
   <menuitem
+      id ="school_menu_club"
+      name="Clubs"
+      parent = "school_menu_root"
+      action ="school_club_action"/>
+
+  <menuitem
+      id ="school_menu_event"
+      name="Events"
+      parent = "school_menu_root"
+      action ="school_event_action"/>
+
+  <menuitem
+      id = "school_menu_leaves"
+      name = "Leaves"
+      parent = "school_menu_root"
+      action ="school_leave_action"/>
+
+  <menuitem
+      id = "school_menu_exam"
+      name = "Exams"
+      parent = "school_menu_root"
+      action ="school_exam_action"/>
+
+  <menuitem
+      id = "school_menu_employee"
+      name = "Employees"
+      parent = "school_menu_root"
+      action ="school_teacher_action"/>
+
+  <menuitem
+      id = "school_menu_employee_teacher"
+      name = "Teachers"
+      parent = "school_menu_employee"
+      action ="school_teacher_action"/>
+
+  <menuitem
+      id = "school_menu_employee_staff"
+      name = "Office Staffs"
+      parent = "school_menu_employee"
+      action ="school_staff_action"/>
+
+  <menuitem
+      id = "school_menu_reports"
+      name = "Reporting"
+      parent = "school_menu_root"
+      action ="leave_information_action"/>
+
+  <menuitem
+      id = "school_menu_leave_report"
+      name = "Leave Information"
+      parent = "school_menu_reports"
+      action ="leave_information_action"/>
+  <menuitem
+      id = "school_menu_student_report"
+      name = "Student Information"
+      parent = "school_menu_reports"
+      action ="student_information_action"/>
+
+  <menuitem
       id ="school_menu_configuration"
       name="Configuration"
       parent = "school_menu_root"
@@ -47,61 +106,4 @@
       parent = "school_menu_configuration"
       action ="school_academic_year_action"/>
 
-  <menuitem
-      id ="school_menu_club"
-      name="Clubs"
-      parent = "school_menu_root"
-      action ="school_club_action"/>
-
-  <menuitem
-      id ="school_menu_event"
-      name="Events"
-      parent = "school_menu_root"
-      action ="school_event_action"/>
-
-  <menuitem
-      id = "school_menu_employee"
-      name = "Employees"
-      parent = "school_menu_root"
-      action ="school_teacher_action"/>
-
-  <menuitem
-      id = "school_menu_employee_teacher"
-      name = "Teachers"
-      parent = "school_menu_employee"
-      action ="school_teacher_action"/>
-
-  <menuitem
-      id = "school_menu_employee_staff"
-      name = "Office Staffs"
-      parent = "school_menu_employee"
-      action ="school_staff_action"/>
-  <menuitem
-      id = "school_menu_leaves"
-      name = "Leaves"
-      parent = "school_menu_root"
-      action ="school_leave_action"/>
-
-  <menuitem
-      id = "school_menu_exam"
-      name = "Exams"
-      parent = "school_menu_root"
-      action ="school_exam_action"/>
-
-  <menuitem
-      id = "school_menu_reports"
-      name = "Reporting"
-      parent = "school_menu_root"
-      action ="leave_information_action"/>
-
-  <menuitem
-      id = "school_menu_leave_report"
-      name = "Leave Information"
-      parent = "school_menu_reports"
-      action ="leave_information_action"/>
-  <menuitem
-      id = "school_menu_student_report"
-      name = "Student Information"
-      parent = "school_menu_reports"
-      action ="student_information_action"/>
 </odoo>

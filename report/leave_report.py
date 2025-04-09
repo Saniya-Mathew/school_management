@@ -11,7 +11,7 @@ class StudentReport(models.AbstractModel):
     def _get_report_values(self, docids,data):
         docs = self.env['school.leave'].browse(docids)
         if not data.get('report'):
-            raise UserError(_("There is no data, this report cannot be printed."))
+            raise UserError(_("This report cannot be printed, There is no data!"))
         return {
             'doc_ids': docids,
             'doc_model': 'school.leave',
