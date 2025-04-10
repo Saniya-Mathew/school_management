@@ -3,16 +3,25 @@
    <template id="report_student">
        <t t-call="web.html_container">
            <t t-call="web.external_layout">
+<!--               <div>-->
+<!--                   <img class="img-responsive d-block mx-auto"-->
+<!--                        t-attf-src="/web/binary/company_logo"-->
+<!--                        alt="Logo"/>-->
+<!--               </div>-->
+<!--                <div>-->
+<!--                    <img t-if="company.logo" class="o_company_logo mb-2" t-att-src="image_data_uri(company.logo)" alt="Logo"/>-->
+<!--                    <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold">Company tagline</div>-->
+<!--                </div>-->
                <div class="page">
                    <div class="oe_structure">
-                        <h2 style="text-align: center;">Student leave Report </h2>
-<!--                       <t t-foreach="data.get('student name')" t-as="o">-->
+                        <h2 style="text-align: center;">Student leave Report </h2><br><br></br></br>
                        <t t-if="data.get('student name')">
-                                <p> Student Name:
-                                    <t t-out ="data.get('student name')"/>
-                                </p>
-<!--                           </t>-->
-                           </t>
+                            <p> Student Name:
+<!--                                <t t-foreach="data.get('student name')" t-as="stu">-->
+                                <t t-out ="data.get('student name')"/>
+                            </p>
+                       </t>
+<!--                        </t>-->
                        <t t-if="data.get('class_id')">
                             <p> Class:
                                 <t t-out ="data.get('class_id')"/>
@@ -36,19 +45,19 @@
                         <table class="table table-border">
                             <thead>
                                 <tr>
-                                     <th>Sl.No</th>
+                                     <th><strong>Sl.No</strong></th>
                                     <t t-if="not data.get('student name')">
-                                        <th>Student Name</th>
+                                        <th><strong>Student Name</strong></th>
                                     </t>
                                     <t t-if="not data.get('class_id')">
-                                        <th>class</th>
+                                        <th><strong>class</strong></th>
                                     </t>
                                     <t t-if="not data.get('student name')">
-                                        <th>Reg No</th>
+                                        <th><strong>Reg No</strong></th>
                                     </t>
-                                    <th>Date From</th>
-                                    <th>Date To</th>
-                                    <th>Reason</th>
+                                    <th><strong>Date From</strong></th>
+                                    <th><strong>Date To</strong></th>
+                                    <th><strong>Reason</strong></th>
                                 </tr>
                             </thead>
                             <tbody>

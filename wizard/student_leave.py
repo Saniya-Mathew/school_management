@@ -21,11 +21,9 @@ class StudentLeaveInform(models.TransientModel):
 
     def action_print_report(self):
         """printing PDF report based on certain conditions"""
-
         query = """SELECT s.f_name,class_id,reg_no,date_from,date_to,reason FROM school_leave l
                 INNER JOIN student_registration s ON l.student_id = s.id """
         where_clause = []
-
         if self.filter_by == 'month':
             where_clause.append("DATE_TRUNC('month', l.date_from) = DATE_TRUNC('month', CURRENT_DATE)")
         if self.filter_by == 'week':
@@ -46,13 +44,15 @@ class StudentLeaveInform(models.TransientModel):
         self.env.cr.execute(query)
         report = self.env.cr.dictfetchall()
         data ={
-            'student name':self.student_ids.f_name,
-            'class_id':self.class_id.id,
+            'student name':",".join(self.student_ids.mapped('f_name')),
+            'class_id':self.class_id.name,
             'filter':self.filter_by,
             'date from':self.date_from ,
             'date to':self.date_to,
+            # 'students':self.student_ids.f_name,
              'report': report
         }
+        print(self.student_ids.ids)
         return self.env.ref('school.action_report_student_leave').report_action(self,data=data)
 
 
