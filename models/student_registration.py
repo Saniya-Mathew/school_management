@@ -85,9 +85,9 @@ class StudentRegistration(models.Model):
         """calculate age from Date of birth"""
         for rec in self:
             if rec.dob:
-                d1 = self.dob
-                d2 = date.today()
-                rec.age = relativedelta(d2, d1).years
+                date_of_birth = self.dob
+                today = date.today()
+                rec.age = relativedelta(today, date_of_birth).years
 
     @api.model
     def update_attendance(self):

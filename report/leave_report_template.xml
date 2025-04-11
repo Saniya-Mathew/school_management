@@ -3,15 +3,6 @@
    <template id="report_student">
        <t t-call="web.html_container">
            <t t-call="web.external_layout">
-<!--               <div>-->
-<!--                   <img class="img-responsive d-block mx-auto"-->
-<!--                        t-attf-src="/web/binary/company_logo"-->
-<!--                        alt="Logo"/>-->
-<!--               </div>-->
-<!--                <div>-->
-<!--                    <img t-if="company.logo" class="o_company_logo mb-2" t-att-src="image_data_uri(company.logo)" alt="Logo"/>-->
-<!--                    <div t-if="company.report_header" t-field="company.report_header" class="o_company_tagline fw-bold">Company tagline</div>-->
-<!--                </div>-->
                <div class="page">
                    <div class="oe_structure">
                         <h2 style="text-align: center;">Student leave Report </h2><br><br></br></br>

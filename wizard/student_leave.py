@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import date, timedelta
-from odoo.exceptions import UserError
+import io
+import json
+import xlsxwriter
 from odoo import fields, models,api,_
+from odoo.tools import json_default
 
 
 class StudentLeaveInform(models.TransientModel):
@@ -21,8 +24,57 @@ class StudentLeaveInform(models.TransientModel):
 
     def action_print_report(self):
         """printing PDF report based on certain conditions"""
+        data=self.prepare_report_data()
+        return self.env.ref('school.action_report_student_leave').report_action(self,data=data)
+
+    def action_print_exel_report(self):
+        data = self.prepare_report_data()
+        return {
+            'type': 'ir.actions.report',
+            'data': {'model': 'student.leave.inform',
+                     'options': json.dumps(data,default=json_default),
+                     'output_format': 'xlsx',
+                     'report_name': 'Leave Excel Report',
+                     },
+            'report_type': 'xlsx',
+        }
+
+    def get_xlsx_report(self, data, response):
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        sheet = workbook.add_worksheet()
+        cell_format = workbook.add_format(
+            {'font_size': '12px', 'align': 'center'})
+        head = workbook.add_format(
+            {'align': 'center', 'bold': True, 'font_size': '20px'})
+        head2 = workbook.add_format(
+            {'align': 'left', 'bold': True, 'font_size': '10px'})
+        txt = workbook.add_format({'font_size': '10px', 'align': 'center'})
+        sheet.merge_range('A2:M3', 'LEAVE EXCEL REPORT', head)
+        sheet.merge_range('B4:M4', 'Student Name:', head2)
+        sheet.merge_range('B5:M5', 'Class:', head2)
+        sheet.merge_range('B7:C7', 'Student Name:', cell_format)
+        sheet.merge_range('D7:E7', 'Class:', cell_format)
+        sheet.merge_range('F7:G7', 'Reg No:', cell_format)
+        sheet.merge_range('H7:I7', 'Date From:', cell_format)
+        sheet.merge_range('J7:K7', 'Date To:', cell_format)
+        sheet.merge_range('L7:M7', 'Reason:', cell_format)
+
+        for i, report in enumerate(data.get('report'),start=9):
+            sheet.merge_range(f'B{i}:C{i}',report.get('f_name'), txt)
+            sheet.merge_range(f'D{i}:E{i}',report.get('class_name'), txt)
+            sheet.merge_range(f'F{i}:G{i}',report.get('reg_no'), txt)
+            sheet.merge_range(f'H{i}:I{i}',report.get('date_from'), txt)
+            sheet.merge_range(f'J{i}:K{i}',report.get('date_to'), txt)
+            sheet.merge_range(f'L{i}:M{i}',report.get('reason'), txt)
+        workbook.close()
+        output.seek(0)
+        response.stream.write(output.read())
+        output.close()
+
+    def prepare_report_data(self):
         query = """SELECT s.f_name,class_id,reg_no,date_from,date_to,reason FROM school_leave l
-                INNER JOIN student_registration s ON l.student_id = s.id """
+                     INNER JOIN student_registration s ON l.student_id = s.id """
         where_clause = []
         if self.filter_by == 'month':
             where_clause.append("DATE_TRUNC('month', l.date_from) = DATE_TRUNC('month', CURRENT_DATE)")
@@ -33,28 +85,25 @@ class StudentLeaveInform(models.TransientModel):
         if self.filter_by == 'day':
             where_clause.append("l.date_from = CURRENT_DATE")
         if self.filter_by == 'custom' and self.date_from and self.date_to:
-              where_clause.append("l.date_from >= '%s' AND l.date_to <= '%s'" % (self.date_from, self.date_to))
+            where_clause.append("l.date_from >= '%s' AND l.date_to <= '%s'" % (self.date_from, self.date_to))
         if self.student_ids:
-            where_clause.append("l.student_id in (%s)" % str( self.student_ids.ids)[1:-1])
+            where_clause.append("l.student_id in (%s)" % str(self.student_ids.ids)[1:-1])
         if self.class_id:
-                where_clause.append("s.class_id = '%s'" % (self.class_id.id))
+            where_clause.append("s.class_id = '%s'" % (self.class_id.id))
         if where_clause:
             query += " WHERE " + " AND ".join(where_clause)
 
         self.env.cr.execute(query)
         report = self.env.cr.dictfetchall()
-        data ={
-            'student name':",".join(self.student_ids.mapped('f_name')),
-            'class_id':self.class_id.name,
-            'filter':self.filter_by,
-            'date from':self.date_from ,
-            'date to':self.date_to,
-            # 'students':self.student_ids.f_name,
-             'report': report
+        data = {
+            'student name': ",".join(self.student_ids.mapped('f_name')),
+            'class_id': self.class_id.name,
+            'filter': self.filter_by,
+            'date from': self.date_from,
+            'date to': self.date_to,
+            'report': report
         }
-        print(self.student_ids.ids)
-        return self.env.ref('school.action_report_student_leave').report_action(self,data=data)
-
+        return data
 
 
 

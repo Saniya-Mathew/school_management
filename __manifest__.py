@@ -37,6 +37,11 @@
         'wizard/student_leave.xml',
         'views/school_management_menu.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'school/static/src/js/action_manager.js'
+        ],
+    },
     'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,

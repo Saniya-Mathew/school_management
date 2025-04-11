@@ -13,8 +13,9 @@
                     <field name="student_ids" widget="many2many_tags"/>
                 </group>
                 <footer>
-                   <button name="action_print_report" string="Print" type="object"/>
-                   <button name="cancel" string="Cancel" special="cancel"/>
+                    <button name="action_print_report" string="Print" type="object"/>
+                    <button name="action_print_exel_report" string="Print in exel" type="object"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
                </footer>
             </form>
         </field>
