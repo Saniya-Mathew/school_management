@@ -3,6 +3,8 @@ from datetime import date, timedelta
 import io
 import json
 import xlsxwriter
+from docutils.nodes import header
+
 from odoo import fields, models,api,_
 from odoo.tools import json_default
 
@@ -44,25 +46,36 @@ class StudentLeaveInform(models.TransientModel):
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
         cell_format = workbook.add_format(
-            {'font_size': '12px', 'align': 'center'})
+            {'font_size': '12px', 'align': 'center','bold': True,})
         head = workbook.add_format(
             {'align': 'center', 'bold': True, 'font_size': '20px'})
         head2 = workbook.add_format(
             {'align': 'left', 'bold': True, 'font_size': '10px'})
         txt = workbook.add_format({'font_size': '10px', 'align': 'center'})
         sheet.merge_range('A2:M3', 'LEAVE EXCEL REPORT', head)
-        sheet.merge_range('B4:M4', 'Student Name:', head2)
-        sheet.merge_range('B5:M5', 'Class:', head2)
-        sheet.merge_range('B7:C7', 'Student Name:', cell_format)
-        sheet.merge_range('D7:E7', 'Class:', cell_format)
-        sheet.merge_range('F7:G7', 'Reg No:', cell_format)
-        sheet.merge_range('H7:I7', 'Date From:', cell_format)
-        sheet.merge_range('J7:K7', 'Date To:', cell_format)
-        sheet.merge_range('L7:M7', 'Reason:', cell_format)
+        if data.get('student name'):
+            sheet.merge_range('B4:M4', f"Student Name: {data.get('student name')}", head2)
+        if data.get('class_id'):
+            sheet.merge_range('B5:M5', f"Class: {data.get('class_id')}", head2)
+        if data.get('filter'):
+            sheet.merge_range('B6:M6', f"Filter By: {data.get('filter')}", head2)
 
-        for i, report in enumerate(data.get('report'),start=9):
-            sheet.merge_range(f'B{i}:C{i}',report.get('f_name'), txt)
-            sheet.merge_range(f'D{i}:E{i}',report.get('class_name'), txt)
+        if not data.get('student name'):
+            sheet.merge_range('B8:C8', 'Student Name:', cell_format)
+            # sheet.Hide_rangeColumn('B8:C8')
+        if not data.get('class_id'):
+            sheet.merge_range('D8:E8', 'Class:', cell_format)
+        column =[('A','B','C','D','E','F','G','H','I','J','K')]
+        sheet.merge_range('F8:G8', 'Reg No:', cell_format)
+        sheet.merge_range('H8:I8', 'Date From:', cell_format)
+        sheet.merge_range('J8:K8', 'Date To:', cell_format)
+        sheet.merge_range('L8:M8', 'Reason:', cell_format)
+
+        for i, report in enumerate(data.get('report'),start=10):
+            if not data.get('student name'):
+                sheet.merge_range(f'B{i}:C{i}',report.get('f_name'), txt)
+            if not data.get('class_id'):
+                sheet.merge_range(f'D{i}:E{i}',report.get('class_id'), txt)
             sheet.merge_range(f'F{i}:G{i}',report.get('reg_no'), txt)
             sheet.merge_range(f'H{i}:I{i}',report.get('date_from'), txt)
             sheet.merge_range(f'J{i}:K{i}',report.get('date_to'), txt)
