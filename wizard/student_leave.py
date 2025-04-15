@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import base64
+from PIL import Image
 from datetime import date, timedelta
 import io
 import json
@@ -52,34 +54,61 @@ class StudentLeaveInform(models.TransientModel):
         head2 = workbook.add_format(
             {'align': 'left', 'bold': True, 'font_size': '10px'})
         txt = workbook.add_format({'font_size': '10px', 'align': 'center'})
-        sheet.merge_range('A2:M3', 'LEAVE EXCEL REPORT', head)
-        if data.get('student name'):
-            sheet.merge_range('B4:M4', f"Student Name: {data.get('student name')}", head2)
-        if data.get('class_id'):
-            sheet.merge_range('B5:M5', f"Class: {data.get('class_id')}", head2)
-        if data.get('filter'):
-            sheet.merge_range('B6:M6', f"Filter By: {data.get('filter')}", head2)
+        wrap_format = workbook.add_format({'text_wrap': True, 'font_size': '6px', 'align': 'center',
+                                           'bold': True})
+        sheet.merge_range('A2:K3', 'LEAVE REPORT', head)
+        company = self.env.company
+        company_info = f"""{company.name}
+        {company.street or ''} {company.street2 or ''}
+        {company.city or ''}, {company.state_id.name or ''} {company.zip or ''}
+        {company.country_id.name or ''}"""
 
+        sheet.merge_range('L2:N4', ' ', wrap_format)
+        sheet.write('L2', company_info, wrap_format)
+        if data.get('student name'):
+            sheet.merge_range('B4:J4', f"Student Name: {data.get('student name')}", head2)
+        if data.get('class_id'):
+            sheet.merge_range('B5:J5', f"Class: {data.get('class_id')}", head2)
+        if data.get('filter'):
+            sheet.merge_range('B6:J6', f"Filter By: {data.get('filter')}", head2)
+        letter = 66
         if not data.get('student name'):
-            sheet.merge_range('B8:C8', 'Student Name:', cell_format)
-            # sheet.Hide_rangeColumn('B8:C8')
+            # sheet.merge_range('B8:C8','Student Name', cell_format)
+            sheet.merge_range(f'{chr(letter)}8:{chr(letter+1)}8', 'Student Name:', cell_format)
+            letter += 2
         if not data.get('class_id'):
-            sheet.merge_range('D8:E8', 'Class:', cell_format)
-        column =[('A','B','C','D','E','F','G','H','I','J','K')]
-        sheet.merge_range('F8:G8', 'Reg No:', cell_format)
-        sheet.merge_range('H8:I8', 'Date From:', cell_format)
-        sheet.merge_range('J8:K8', 'Date To:', cell_format)
-        sheet.merge_range('L8:M8', 'Reason:', cell_format)
+            # sheet.merge_range('D8:E8', 'Class', cell_format)
+            sheet.merge_range(f'{chr(letter)}8:{chr(letter+1)}8', 'Class', cell_format)
+            letter += 2
+        # sheet.merge_range('F8:G8', 'Reg No', cell_format)
+        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8', 'Reg No', cell_format)
+        letter += 2
+        # sheet.merge_range('H8:I8', 'Date From', cell_format)
+        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8',  'Date From', cell_format)
+        letter += 2
+        # sheet.merge_range('J8:K8', 'Date To', cell_format)
+        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8', 'Date To', cell_format)
+        letter += 2
+        # sheet.merge_range('L8:M8', 'Reason', cell_format)
+        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8',  'Reason', cell_format)
+        letter += 2
 
         for i, report in enumerate(data.get('report'),start=10):
+            letter = 66
             if not data.get('student name'):
-                sheet.merge_range(f'B{i}:C{i}',report.get('f_name'), txt)
+                sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('f_name'), txt)
+                letter += 2
             if not data.get('class_id'):
-                sheet.merge_range(f'D{i}:E{i}',report.get('class_id'), txt)
-            sheet.merge_range(f'F{i}:G{i}',report.get('reg_no'), txt)
-            sheet.merge_range(f'H{i}:I{i}',report.get('date_from'), txt)
-            sheet.merge_range(f'J{i}:K{i}',report.get('date_to'), txt)
-            sheet.merge_range(f'L{i}:M{i}',report.get('reason'), txt)
+                sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('class_id'), txt)
+                letter += 2
+            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('reg_no'), txt)
+            letter += 2
+            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('date_from'), txt)
+            letter += 2
+            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('date_to'), txt)
+            letter += 2
+            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('reason'), txt)
+
         workbook.close()
         output.seek(0)
         response.stream.write(output.read())
