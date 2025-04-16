@@ -8,11 +8,9 @@
                         <h2 style="text-align: center;">Student leave Report </h2><br><br></br></br>
                        <t t-if="data.get('student name')">
                             <p> Student Name:
-<!--                                <t t-foreach="data.get('student name')" t-as="stu">-->
                                 <t t-out ="data.get('student name')"/>
                             </p>
                        </t>
-<!--                        </t>-->
                        <t t-if="data.get('class_id')">
                             <p> Class:
                                 <t t-out ="data.get('class_id')"/>

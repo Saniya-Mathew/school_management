@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import base64
-from PIL import Image
 from datetime import date, timedelta
 import io
 import json
 import xlsxwriter
-from docutils.nodes import header
 
 from odoo import fields, models,api,_
 from odoo.tools import json_default
@@ -27,11 +24,12 @@ class StudentLeaveInform(models.TransientModel):
     date_to = fields.Date('End Date',)
 
     def action_print_report(self):
-        """printing PDF report based on certain conditions"""
+        """printing PDF report"""
         data=self.prepare_report_data()
         return self.env.ref('school.action_report_student_leave').report_action(self,data=data)
 
     def action_print_exel_report(self):
+        """Printing exel report"""
         data = self.prepare_report_data()
         return {
             'type': 'ir.actions.report',
@@ -44,6 +42,7 @@ class StudentLeaveInform(models.TransientModel):
         }
 
     def get_xlsx_report(self, data, response):
+        """xlsx report format"""
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
@@ -56,58 +55,56 @@ class StudentLeaveInform(models.TransientModel):
         txt = workbook.add_format({'font_size': '10px', 'align': 'center'})
         wrap_format = workbook.add_format({'text_wrap': True, 'font_size': '6px', 'align': 'center',
                                            'bold': True})
-        sheet.merge_range('A2:K3', 'LEAVE REPORT', head)
+        sheet.merge_range('C2:F3', 'LEAVE REPORT', head)
         company = self.env.company
         company_info = f"""{company.name}
         {company.street or ''} {company.street2 or ''}
-        {company.city or ''}, {company.state_id.name or ''} {company.zip or ''}
+        {company.city or ''} {company.state_id.name or ''}
         {company.country_id.name or ''}"""
+        sheet.merge_range('B2:B4', company_info, wrap_format)
+        sheet.set_column(1,1,25)
+        sheet.set_column(2,2,25)
+        sheet.set_column(3,3,25)
+        sheet.set_column(4,4,25)
+        sheet.set_column(5,5,25)
+        sheet.set_column(6,6,25)
 
-        sheet.merge_range('L2:N4', ' ', wrap_format)
-        sheet.write('L2', company_info, wrap_format)
         if data.get('student name'):
-            sheet.merge_range('B4:J4', f"Student Name: {data.get('student name')}", head2)
+            sheet.write('C5', f"Student Name: {data.get('student name')}", head2)
         if data.get('class_id'):
-            sheet.merge_range('B5:J5', f"Class: {data.get('class_id')}", head2)
+            sheet.write('C6', f"Class: {data.get('class_id')}", head2)
         if data.get('filter'):
-            sheet.merge_range('B6:J6', f"Filter By: {data.get('filter')}", head2)
-        letter = 66
+            sheet.write('C7', f"Filter By: {data.get('filter')}", head2)
+        column = 66
         if not data.get('student name'):
-            # sheet.merge_range('B8:C8','Student Name', cell_format)
-            sheet.merge_range(f'{chr(letter)}8:{chr(letter+1)}8', 'Student Name:', cell_format)
-            letter += 2
+            sheet.write(f'{chr(column)}8', 'Student Name', cell_format)
+            column += 1
         if not data.get('class_id'):
-            # sheet.merge_range('D8:E8', 'Class', cell_format)
-            sheet.merge_range(f'{chr(letter)}8:{chr(letter+1)}8', 'Class', cell_format)
-            letter += 2
-        # sheet.merge_range('F8:G8', 'Reg No', cell_format)
-        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8', 'Reg No', cell_format)
-        letter += 2
-        # sheet.merge_range('H8:I8', 'Date From', cell_format)
-        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8',  'Date From', cell_format)
-        letter += 2
-        # sheet.merge_range('J8:K8', 'Date To', cell_format)
-        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8', 'Date To', cell_format)
-        letter += 2
-        # sheet.merge_range('L8:M8', 'Reason', cell_format)
-        sheet.merge_range(f'{chr(letter)}8:{chr(letter + 1)}8',  'Reason', cell_format)
-        letter += 2
+            sheet.write(f'{chr(column)}8', 'Class', cell_format)
+            column += 1
+        sheet.write(f'{chr(column)}8', 'Reg No', cell_format)
+        column += 1
+        sheet.write(f'{chr(column)}8',  'Date From', cell_format)
+        column += 1
+        sheet.write(f'{chr(column)}8', 'Date To', cell_format)
+        column += 1
+        sheet.write(f'{chr(column)}8',  'Reason', cell_format)
 
-        for i, report in enumerate(data.get('report'),start=10):
-            letter = 66
+        for i, report in enumerate(data.get('report'),start=9):
+            column = 66
             if not data.get('student name'):
-                sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('f_name'), txt)
-                letter += 2
+                sheet.write(f'{chr(column)}{i}',report.get('f_name'), txt)
+                column += 1
             if not data.get('class_id'):
-                sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('class_id'), txt)
-                letter += 2
-            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('reg_no'), txt)
-            letter += 2
-            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('date_from'), txt)
-            letter += 2
-            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('date_to'), txt)
-            letter += 2
-            sheet.merge_range(f'{chr(letter)}{i}:{chr(letter + 1)}{i}',report.get('reason'), txt)
+                sheet.write(f'{chr(column)}{i}',report.get('class_id'), txt)
+                column += 1
+            sheet.write(f'{chr(column)}{i}',report.get('reg_no'), txt)
+            column += 1
+            sheet.write(f'{chr(column)}{i}:',report.get('date_from'), txt)
+            column += 1
+            sheet.write(f'{chr(column)}{i}',report.get('date_to'), txt)
+            column += 1
+            sheet.write(f'{chr(column)}{i}',report.get('reason'), txt)
 
         workbook.close()
         output.seek(0)
@@ -115,6 +112,7 @@ class StudentLeaveInform(models.TransientModel):
         output.close()
 
     def prepare_report_data(self):
+        """filtering conditions"""
         query = """SELECT s.f_name,class_id,reg_no,date_from,date_to,reason FROM school_leave l
                      INNER JOIN student_registration s ON l.student_id = s.id """
         where_clause = []

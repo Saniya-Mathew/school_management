@@ -17,8 +17,8 @@
                                 <t t-if="data.get('report')">
                                     <t t-foreach="data.get('report')" t-as="row">
                                         <tr>
-                                             <td><t t-esc="row[0]"/></td>
-                                             <td><t t-esc="row[1]"/></td>
+                                             <td><t t-esc="row.get('f_name')"/></td>
+                                             <td><t t-esc="row.get('date')"/></td>
                                         </tr>
                                     </t>
                                 </t>
