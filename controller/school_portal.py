@@ -4,16 +4,25 @@ from odoo.http import request
 
 
 class CustomWebsite(http.Controller):
-    @http.route(['/school'], type='http', auth='public', website=True)
+    @http.route(['/students'], type='http', auth='public', website=True)
 
-    def display_calculations(self, **kwargs):
+    def student_registration(self, **kwargs):
+        return request.render('school.web_form_template')
 
-        # Fetch calculations from your custom model
-        calculation_model = request.env['student.registration']
-        calculations = calculation_model.search([])
+    @http.route('/students/submit', type='http', auth='public', website=True, methods=['POST'])
 
-        values = {
-            'calculations': calculations,
-        }
+    def web_student_form_submit(self, **post):
+         request.env['student.registration'].sudo().create({
+                     'f_name': post.get('name'),
+                     'phone': post.get('phone'),
+                     'email': post.get('email'),
+        })
 
-        return http.request.render('school.template_id', values)
+    @http.route(['/leaves'], type='http', auth='public', website=True)
+    def student_leave(self, **kwargs):
+        return request.render('school.web_leave_template')
+
+    @http.route(['/events'], type='http', auth='public', website=True)
+    def school_event(self, **kwargs):
+        return request.render('school.web_event_template')
+

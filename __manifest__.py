@@ -1,7 +1,7 @@
 {
     'name': "School Management",
     'version': '1.0',
-    'depends': ['base','mail','sale',],
+    'depends': ['base','mail','sale','website'],
     'author': "San",
     'category': 'Category',
     'description': """
@@ -31,7 +31,7 @@
         'views/school_teacher_view.xml',
         'views/school_leave_views.xml',
         'views/school_exam_view.xml',
-        'views/school_portal.xml',
+        'views/school_portal_template.xml',
         'report/ir_actions_report.xml',
         'report/leave_report_template.xml',
         'report/student_report_template.xml',
