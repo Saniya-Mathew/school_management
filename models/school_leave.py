@@ -13,7 +13,7 @@ class SchoolLeave(models.Model):
     _rec_name = 'student_id'
 
 
-    student_id = fields.Many2one('student.registration', string='Student')
+    student_id = fields.Many2one('student.registration', string='Student', required=True)
     stu_class = fields.Integer(string="Class")
     date_from = fields.Date('Start Date', copy=False, default=fields.Date.context_today, )
     date_to = fields.Date('End Date', copy=False)

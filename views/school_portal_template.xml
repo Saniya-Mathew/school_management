@@ -284,7 +284,7 @@
                         <h1>School Events</h1>
                     </div>
                     <div class="container" style="padding: 100px">
-                        <form action="/webform/submit" enctype="multipart/form-data" class="o_mark_required"
+                        <form action="/events/submit" enctype="multipart/form-data" class="o_mark_required"
                               data-mark="*" data-model_name="" data-success-page="">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <div class="s_website_form_rows row s_col_no_bgcolor">
@@ -310,10 +310,15 @@
                                             <span class="s_website_form_label_content">club</span>
                                         </label>
                                         <div class="col-sm">
-                                            <input id="name" type="text" class="form-control s_website_form_input"
-                                                   name="Name" required="1"/>
-                                            <br></br>
-                                        </div>
+                                    <select name="club_id" class="form-control s_website_form_input"
+                                            required="1">
+                                        <t t-foreach="club" t-as="club">
+                                            <option t-att-value="club.id">
+                                                <t t-esc="club.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-12 s_website_form_field s_website_form_required"
@@ -325,14 +330,20 @@
                                         </label>
                                         <div class="col-sm">
                                             <input id="name" type="date" class="form-control s_website_form_input"
-                                                   name="Name" required="1"/>
+                                                   name="date" required="1"/>
                                             <br></br>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="web_event_form_submit" data-name="Submit Button">
-                                    <div style="width: 200px;" class="s_website_form_label"/>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group col-12 s_web_event_form_submit mt-3" data-name="Submit Button">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <center>
+                                                <button type="submit" class="btn btn-primary o_website_form_send">Submit
+                                                </button>
+                                            </center>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

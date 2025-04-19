@@ -16,7 +16,7 @@ class StudentRegistration(models.Model):
 
     reg_no = fields.Char("Registration Number",copy=False, readonly=True, default=lambda self: _('New'))
     date = fields.Date(string="Registration Date")
-    f_name = fields.Char(string="First Name")
+    f_name = fields.Char(string="First Name",required=True)
     l_name = fields.Char(string="Last Name")
     father = fields.Char(string="Father's Name")
     mother = fields.Char(string="Mother's Name")
