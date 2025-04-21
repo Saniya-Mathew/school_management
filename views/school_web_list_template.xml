@@ -6,40 +6,123 @@
                  <div style="padding: 30px; text-align: center; color: white; background-color: grey">
                     <h1>Student Registration</h1>
                  </div>
-                 <div class="container" style="padding-top: 30px">
-                     <list action="/students/new" enctype="multipart/form-data" class="o_mark_required"
-                           data-mark="*" data-model_name="" data-success-page="">
+                 <div class="container" style="padding: 30px; border: solid grey 1px">
                          <div class="list-group col-12 s_create_student_registration mt-3" data-name="Submit Button">
                              <div class="row">
                                  <div class="col-sm">
-                                     <button type="submit" class="btn btn-primary o_website_form_send" >
-                                         New
-                                     </button>
+                                     <form action="/students/new" method="GET">
+                                         <button type="submit" class="btn btn-primary o_website_form_send" >
+                                             New
+                                         </button>
+                                     </form>
                                  </div>
                              </div>
                          </div>
-                         <table class="table table-border">
+                         <table class="table table-striped">
                              <thead>
                                  <tr>
-                                     <th>
-                                         <strong>Reg.no</strong>
-                                     </th>
-                                     <th>
-                                         <strong>Name</strong>
-                                     </th>
-                                     <th>
-                                         <strong>Admission Date</strong>
-                                     </th>
-                                     <th>
-                                         <strong>email</strong>
-                                     </th>
-                                     <th>
-                                         <strong>Date of Birth</strong>
-                                     </th>
+                                     <th><strong>Reg.no</strong></th>
+                                     <th><strong>Name</strong></th>
+                                     <th><strong>Admission Date</strong></th>
+                                     <th><strong>email</strong></th>
+                                     <th><strong>Date of Birth</strong></th>
                                  </tr>
                              </thead>
+                             <tbody>
+                                <tr t-foreach="student" t-as="record">
+                                    <td><span t-esc="record.reg_no"/></td>
+                                    <td><span t-esc="record.f_name"/></td>
+                                    <td><span t-esc="record.date"/></td>
+                                    <td><span t-esc="record.email"/></td>
+                                    <td><span t-esc="record.dob"/></td>
+
+                                </tr>
+                             </tbody>
                          </table>
-                     </list>
+                 </div>
+             </div>
+        </t>
+    </template>
+
+    <template id="leave_list_template">
+        <t t-call="website.layout">
+             <div id="wrap" class="oe_structure oe_empty">
+                 <div style="padding: 30px; text-align: center; color: white; background-color: grey">
+                    <h1>Student Leaves</h1>
+                 </div>
+                 <div class="container" style="padding: 30px; border: solid grey 1px">
+                         <div class="list-group col-12 s_create_student_registration mt-3" data-name="Submit Button">
+                             <div class="row">
+                                 <div class="col-sm">
+                                     <form action="/leaves/new" method="GET">
+                                         <button type="submit" class="btn btn-primary o_website_form_send" >
+                                             New
+                                         </button>
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>
+                         <table class="table table-striped">
+                             <thead>
+                                 <tr>
+                                     <th><strong>Student Name</strong></th>
+                                     <th><strong>class</strong></th>
+                                     <th><strong>Start Date</strong></th>
+                                     <th><strong>End Date</strong></th>
+                                     <th><strong>Reason</strong></th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                <tr t-foreach="student" t-as="rec">
+                                    <td><span t-esc="rec.student_id.f_name"/></td>
+                                    <td><span t-esc="rec.stu_class"/></td>
+                                    <td><span t-esc="rec.date_from"/></td>
+                                    <td><span t-esc="rec.date_to"/></td>
+                                    <td><span t-esc="rec.reason"/></td>
+
+                                </tr>
+                             </tbody>
+                         </table>
+                 </div>
+             </div>
+        </t>
+    </template>
+
+    <template id="event_list_template">
+        <t t-call="website.layout">
+             <div id="wrap" class="oe_structure oe_empty">
+                 <div style="padding: 30px; text-align: center; color: white; background-color: grey">
+                    <h1>School Events</h1>
+                 </div>
+                 <div class="container" style="padding: 30px; border: solid grey 1px">
+                         <div class="list-group col-12 s_create_student_registration mt-3" data-name="Submit Button">
+                             <div class="row">
+                                 <div class="col-sm">
+                                     <form action="/events/new" method="GET">
+                                         <button type="submit" class="btn btn-primary o_website_form_send" >
+                                             New
+                                         </button>
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>
+                         <table class="table table-striped">
+                             <thead>
+                                 <tr>
+                                     <th><strong>Event Name</strong></th>
+                                     <th><strong>Organizing club</strong></th>
+                                     <th><strong>Event Date</strong></th>
+
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                <tr t-foreach="club" t-as="rec">
+                                    <td><span t-esc="rec.name"/></td>
+                                    <td><span t-esc="rec.club_id.name"/></td>
+                                    <td><span t-esc="rec.event_date"/></td>
+                                </tr>
+                             </tbody>
+                         </table>
                  </div>
              </div>
         </t>

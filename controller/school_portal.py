@@ -7,8 +7,11 @@ class CustomWebsite(http.Controller):
     @http.route(['/students'], type='http', auth='public', website=True)
 
     def student_registration(self, **kwargs):
-        return request.render('school.student_list_template')
-        # return request.render('school.web_form_template')
+        records = request.env['student.registration'].sudo().search([])
+        values = {
+            'student': records,
+        }
+        return request.render('school.student_list_template',values)
 
     @http.route(['/students/new'], type='http', auth='public', website=True)
     def create_student_registration(self, **kwargs):
@@ -29,16 +32,25 @@ class CustomWebsite(http.Controller):
 
     @http.route(['/leaves'], type='http', auth='public', website=True)
     def student_leave(self, **kwargs):
-        students = request.env['student.registration'].sudo().search([])
+        students = request.env['school.leave'].sudo().search([])
         values = {
                'student': students,
         }
-        return request.render('school.web_leave_template', values)
+        return request.render('school.leave_list_template', values)
+
+    @http.route(['/leaves/new'], type='http', auth='public', website=True)
+    def create_student_leave(self, **kwargs):
+        students = request.env['student.registration'].sudo().search([])
+        values = {
+            'student': students,
+        }
+        return request.render('school.web_leave_template',values)
 
     @http.route('/leaves/submit', type='http', auth='public', website=True, methods=['POST'])
     def web_leave_form_submit(self, **post):
         request.env['school.leave'].sudo().create({
             'student_id': post.get('student_id'),
+            'stu_class': post.get('class'),
             'date_from': post.get('s_date'),
             'date_to': post.get('e_date'),
             'reason': post.get('reason')
@@ -46,9 +58,17 @@ class CustomWebsite(http.Controller):
 
     @http.route(['/events'], type='http', auth='public', website=True)
     def school_event(self, **kwargs):
+        records = request.env['school.event'].sudo().search([])
+        values = {
+            'club': records,
+        }
+        return request.render('school.event_list_template', values)
+
+    @http.route(['/events/new'], type='http', auth='public', website=True)
+    def create_school_event(self, **kwargs):
         club = request.env['school.club'].sudo().search([])
         values = {
-                'club': club,
+            'club': club,
         }
         return request.render('school.web_event_template', values)
 
