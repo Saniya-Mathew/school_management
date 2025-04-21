@@ -253,8 +253,8 @@
                                         <span class="s_website_form_label_content">Reason</span>
                                     </label>
                                     <div class="col-sm">
-                                        <input id="name" type="text" class="form-control s_website_form_input"
-                                               required="1"/>
+                                        <input id="reason" type="text" class="form-control s_website_form_input"
+                                              name="reason" required="1"/>
                                         <br></br>
                                     </div>
                                 </div>
