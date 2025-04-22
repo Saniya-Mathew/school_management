@@ -1,6 +1,7 @@
 {
     'name': "School Management",
     'version': '1.0',
+    'type': 'module',
     'depends': ['base','mail','sale','website'],
     'author': "San",
     'category': 'Category',
@@ -46,7 +47,10 @@
         ],
         'web.assets_frontend': [
             'school/static/src/js/school_website.js',
-        ]
+        ],
+        # 'web.assets_frontend_lazy': [
+        #     ('include', 'web.assets_frontend'),
+        # ],
     },
     'license': 'LGPL-3',
     'installable': True,

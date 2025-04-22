@@ -2,22 +2,22 @@
 <odoo>
     <template id="student_list_template">
         <t t-call="website.layout">
-             <div id="wrap" class="oe_structure oe_empty">
-                 <div style="padding: 30px; text-align: center; color: white; background-color: grey">
+            <div id="wrap" class="oe_structure oe_empty">
+                <div style="padding: 30px; text-align: center; color: white; background-color: grey">
                     <h1>Student Registration</h1>
-                 </div>
-                 <div class="container" style="padding: 30px; border: solid grey 1px">
-                         <div class="list-group col-12 s_create_student_registration mt-3" data-name="Submit Button">
-                             <div class="row">
-                                 <div class="col-sm">
-                                     <form action="/students/new" method="GET">
-                                         <button type="submit" class="btn btn-primary o_website_form_send" >
-                                             New
-                                         </button>
-                                     </form>
-                                 </div>
-                             </div>
-                         </div>
+                </div>
+                <div class="container" style="padding: 30px; border: solid grey 1px">
+                    <div class="list-group col-12 s_create_student_registration mt-3" data-name="Submit Button">
+                        <div class="row">
+                            <div class="col-sm">
+                                <form action="/students/new" method="GET">
+                                    <button type="submit" class="btn btn-primary o_website_form_send">
+                                        New
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                          <table class="table table-striped">
                              <thead>
                                  <tr>
@@ -36,16 +36,16 @@
                                     <td><span t-esc="record.email"/></td>
                                     <td><span t-esc="record.dob"/></td>
                                     <td>
-                                        <button class="btn fa fa-trash-o remove_line"
-                                                style="color: red; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
-                                                name="delete"
-                                                aria-label="Delete row 1"></button>
-                                    </td>
-                                    <td>
                                         <button class="btn fa fa-edit edit_line"
-                                                style="color: red; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
                                                 name="edit"
                                                 aria-label="Edit row 1"></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn fa fa-trash-o remove_line"
+                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="delete"
+                                                aria-label="Delete row 1"></button>
                                     </td>
                                 </tr>
                              </tbody>
@@ -90,7 +90,18 @@
                                     <td><span t-esc="rec.date_from"/></td>
                                     <td><span t-esc="rec.date_to"/></td>
                                     <td><span t-esc="rec.reason"/></td>
-
+                                    <td>
+                                        <button class="btn fa fa-edit edit_line"
+                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="edit"
+                                                aria-label="Edit row 1"></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn fa fa-trash-o remove_line"
+                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="delete"
+                                                aria-label="Delete row 1"></button>
+                                    </td>
                                 </tr>
                              </tbody>
                          </table>
@@ -131,6 +142,18 @@
                                     <td><span t-esc="rec.name"/></td>
                                     <td><span t-esc="rec.club_id.name"/></td>
                                     <td><span t-esc="rec.event_date"/></td>
+                                    <td>
+                                        <button class="btn fa fa-edit edit_line"
+                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="edit"
+                                                aria-label="Edit row 1"></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn fa fa-trash-o remove_line"
+                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="delete"
+                                                aria-label="Delete row 1"></button>
+                                    </td>
                                 </tr>
                              </tbody>
                          </table>

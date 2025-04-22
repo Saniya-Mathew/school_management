@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from os.path import exists
+
 from odoo import http
 from odoo.http import request
 
@@ -79,3 +81,14 @@ class CustomWebsite(http.Controller):
             'club_id': post.get('club_id'),
             'event_date': post.get('date'),
         })
+
+    @http.route('/students/<f_name>/', auth='public', website=True)
+    def students(self, name):
+        return '<h1>{}</h1>'.format(name)
+
+    # @http.route('/students/delete', type='http', auth='public', website=True)
+    # def delete_student(self, **kwargs):
+    #     student = request.env['student.registration'].sudo().search([])
+    #     if student == exists('dob'):
+    #         student.unlink()
+    #     return request.render('school.student_list_template')
