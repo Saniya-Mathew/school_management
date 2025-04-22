@@ -42,8 +42,11 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'school/static/src/js/action_manager.js'
+            'school/static/src/js/action_manager.js',
         ],
+        'web.assets_frontend': [
+            'school/static/src/js/school_website.js',
+        ]
     },
     'license': 'LGPL-3',
     'installable': True,

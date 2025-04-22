@@ -35,7 +35,18 @@
                                     <td><span t-esc="record.date"/></td>
                                     <td><span t-esc="record.email"/></td>
                                     <td><span t-esc="record.dob"/></td>
-
+                                    <td>
+                                        <button class="btn fa fa-trash-o remove_line"
+                                                style="color: red; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="delete"
+                                                aria-label="Delete row 1"></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn fa fa-edit edit_line"
+                                                style="color: red; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
+                                                name="edit"
+                                                aria-label="Edit row 1"></button>
+                                    </td>
                                 </tr>
                              </tbody>
                          </table>
