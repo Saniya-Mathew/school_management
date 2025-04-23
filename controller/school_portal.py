@@ -29,8 +29,7 @@ class CustomWebsite(http.Controller):
                       'aadhar_no': post.get('Aadhaar Number'),
                       'dob':post.get('date of birth')
          })
-         # return request.redirect('/leaves')
-
+         return request.redirect('/students')
 
     @http.route(['/leaves'], type='http', auth='public', website=True)
     def student_leave(self, **kwargs):
@@ -82,13 +81,13 @@ class CustomWebsite(http.Controller):
             'event_date': post.get('date'),
         })
 
-    @http.route('/students/<f_name>/', auth='public', website=True)
-    def students(self, name):
-        return '<h1>{}</h1>'.format(name)
 
-    # @http.route('/students/delete', type='http', auth='public', website=True)
-    # def delete_student(self, **kwargs):
-    #     student = request.env['student.registration'].sudo().search([])
-    #     if student == exists('dob'):
-    #         student.unlink()
-    #     return request.render('school.student_list_template')
+    @http.route('/students/delete/<int:student_id>', type='http', auth='public', website=True, methods=['GET'])
+    def delete_student_record(self, student_id):
+        student = request.env['student.registration'].sudo().browse(student_id)
+        if student:
+            student.unlink()
+        return request.redirect('/students')
+
+
+
