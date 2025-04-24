@@ -10,7 +10,7 @@ class SchoolExam(models.Model):
 
     name = fields.Char(string="Exam Name")
     exm_class_id = fields.Many2one( 'class',string="Class")
-    paper =fields.Many2many('subject', string="Papers")
+    paper_ids =fields.Many2many('subject', string="Papers")
     stu_ids =fields.Many2many('student.registration',string="Student")
 
     def action_add_exam(self):

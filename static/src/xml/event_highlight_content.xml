@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Product Category tab content template-->
+<templates xml:space="preserve">
+    <t t-name="school.category_data">
+        <section class="categories_section">
+            <div class="container">
+                <h3 class="section_heading">School Events</h3>
+                <div class="categories_wrapper">
+                        <t t-foreach="result.event" t-as="event" t-key="event.id">
+                            <div class="event">
+                                <div class="img_wrapper">
+                                    <t t-if="event.image_1920">
+                                        <img t-att-src="'data:image/png;base64,' + event.image_1920"
+                                             class="img img-fluid rotate-center"
+                                             t-att-alt="event.name or 'event Image'"
+                                             loading="lazy"/>
+                                    </t>
+                                    <t t-else="">
+                                        <img src="/theme_og_store/static/src/img/default_category.svg"
+                                             class="img img-fluid rotate-center"></img>
+<!--                                             alt="Default Category Image"-->
+<!--                                             loading="lazy"/>-->
+                                    </t>
+                                </div>
+                                <div class="type">
+                                    <t t-esc="event.name"/>
+                                </div>
+                            </div>
+                        </t>
+                </div>
+            </div>
+        </section>
+    </t>
+</templates>

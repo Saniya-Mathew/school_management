@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models,api
-from datetime import date, timedelta
-from dateutil.relativedelta import relativedelta
-
+from datetime import timedelta
 
 
 class SchoolLeave(models.Model):
@@ -13,7 +11,7 @@ class SchoolLeave(models.Model):
     _rec_name = 'student_id'
 
 
-    student_id = fields.Many2one('student.registration', string='Student', required=True)
+    student_id = fields.Many2one('student.registration', string='Student',ondelete='cascade',required=True)
     stu_class = fields.Integer(string="Class")
     date_from = fields.Date('Start Date', copy=False, default=fields.Date.context_today, )
     date_to = fields.Date('End Date', copy=False)
@@ -23,7 +21,7 @@ class SchoolLeave(models.Model):
 
     @api.depends('date_from', 'date_to')
     def _compute_total_day(self):
-        """Method for compute number of leave without include sun and sat"""
+        """Method for compute total number of leave not including sun and sat"""
         for rec in self:
             if rec.date_from and rec.date_to and rec.date_from <= rec.date_to:
                 date_from = rec.date_from

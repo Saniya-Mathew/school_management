@@ -7,7 +7,6 @@ from odoo.http import request
 
 class CustomWebsite(http.Controller):
     @http.route(['/students'], type='http', auth='public', website=True)
-
     def student_registration(self, **kwargs):
         records = request.env['student.registration'].sudo().search([])
         values = {
@@ -22,20 +21,26 @@ class CustomWebsite(http.Controller):
 
     @http.route('/students/submit', type='http', auth='public', website=True, methods=['POST'])
     def web_student_form_submit(self, **post):
-         request.env['student.registration'].sudo().create({
+        student_model = request.env['student.registration'].sudo()
+        student_id = post.get('student_id')
+        vals = {
                       'f_name': post.get('name'),
                       'phone': post.get('phone'),
                       'email': post.get('email'),
                       'aadhar_no': post.get('Aadhaar Number'),
                       'dob':post.get('date of birth')
-         })
-         return request.redirect('/students')
+        }
+        if student_id:
+            student = student_model.browse(int(student_id))
+            student.write(vals)
+        else:
+            student_model.create(vals)
 
     @http.route(['/leaves'], type='http', auth='public', website=True)
     def student_leave(self, **kwargs):
         students = request.env['school.leave'].sudo().search([])
         values = {
-               'student': students,
+               'leave': students,
         }
         return request.render('school.leave_list_template', values)
 
@@ -85,9 +90,43 @@ class CustomWebsite(http.Controller):
     @http.route('/students/delete/<int:student_id>', type='http', auth='public', website=True, methods=['GET'])
     def delete_student_record(self, student_id):
         student = request.env['student.registration'].sudo().browse(student_id)
+        leave_id =request.env['school.leave'].sudo().browse(student_id)
         if student:
             student.unlink()
         return request.redirect('/students')
 
+    @http.route('/students/edit/<int:student_id>', type='http', auth='public', website=True)
+    def edit_student(self, student_id):
+        student =request.env['student.registration'].sudo().browse(student_id)
+        return request.render('school.web_form_template', {
+            'student': student
+        })
+
+    @http.route('/leaves/delete/<int:student_id>', type='http', auth='public', website=True, methods=['GET'])
+    def delete_student_leave_record(self, student_id):
+        student = request.env['school.leave'].sudo().browse(student_id)
+        if student:
+            student.unlink()
+        return request.redirect('/leaves')
 
 
+    @http.route('/leaves/edit/<int:student_id>', type='http', auth='public', website=True)
+    def edit_student_leve(self, student_id):
+        leaves =request.env['school.leave'].sudo().browse(student_id)
+        return request.render('school.web_leave_template', {
+            'leave': leaves
+        })
+
+    @http.route('/events/delete/<int:event_id>', type='http', auth='public', website=True, methods=['GET'])
+    def delete_school_events(self, event_id):
+        event = request.env['school.event'].sudo().browse(event_id)
+        if event:
+            event.unlink()
+        return request.redirect('/events')
+
+    @http.route('/events/edit/<int:event_id>', type='http', auth='public', website=True)
+    def edit_events_record(self, event_id):
+        events = request.env['school.event'].sudo().browse(event_id)
+        return request.render('school.web_event_template', {
+            'event': events
+        })

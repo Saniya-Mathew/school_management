@@ -29,18 +29,17 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                <tr t-foreach="student" t-as="record">
+                                <tr t-foreach="student" t-as="record" ondelete="cascade">
                                     <td><span t-esc="record.reg_no"/></td>
                                     <td><span t-esc="record.f_name"/></td>
                                     <td><span t-esc="record.date"/></td>
                                     <td><span t-esc="record.email"/></td>
                                     <td><span t-esc="record.dob"/></td>
                                     <td>
-                                          <button class="btn fa fa-edit edit_line"
-                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
-                                                name="edit"
-                                                aria-label="Edit row 1">
-                                          </button>
+                                        <a t-att-href="'/students/edit/%s' % record.id"
+                                            class="btn fa fa-edit"
+                                            style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px; margin-bottom: 15px;">
+                                        </a>
                                     </td>
                                     <td>
                                          <a t-att-href="'/students/delete/%s' % record.id"
@@ -85,23 +84,23 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                <tr t-foreach="student" t-as="rec">
+                                <tr t-foreach="leave" t-as="rec" >
                                     <td><span t-esc="rec.student_id.f_name"/></td>
                                     <td><span t-esc="rec.stu_class"/></td>
                                     <td><span t-esc="rec.date_from"/></td>
                                     <td><span t-esc="rec.date_to"/></td>
                                     <td><span t-esc="rec.reason"/></td>
                                     <td>
-                                        <button class="btn fa fa-edit edit_line"
-                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
-                                                name="edit"
-                                                aria-label="Edit row 1"></button>
+                                        <a t-att-href="'/leaves/edit/%s' % rec.id"
+                                            class="btn fa fa-edit"
+                                            style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px; margin-bottom: 15px;">
+                                        </a>
                                     </td>
                                     <td>
-                                        <button class="btn fa fa-trash-o remove_line"
-                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
-                                                name="delete"
-                                                aria-label="Delete row 1"></button>
+                                       <a t-att-href="'/leaves/delete/%s' % rec.id"
+                                            class="btn fa fa-trash-o"
+                                            style="color: red; padding: 0px; margin-left: -6px; margin-top: 6px; margin-bottom: 15px;">
+                                       </a>
                                     </td>
                                 </tr>
                              </tbody>
@@ -144,16 +143,16 @@
                                     <td><span t-esc="rec.club_id.name"/></td>
                                     <td><span t-esc="rec.event_date"/></td>
                                     <td>
-                                        <button class="btn fa fa-edit edit_line"
-                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
-                                                name="edit"
-                                                aria-label="Edit row 1"></button>
+                                        <a t-att-href="'/events/edit/%s' % rec.id"
+                                            class="btn fa fa-edit"
+                                            style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px; margin-bottom: 15px;">
+                                        </a>
                                     </td>
                                     <td>
-                                        <button class="btn fa fa-trash-o remove_line"
-                                                style="color: black; padding: 0px; margin-left: -6px; margin-top: 6px;margin-bottom:15px;"
-                                                name="delete"
-                                                aria-label="Delete row 1"></button>
+                                        <a t-att-href="'/events/delete/%s' % rec.id"
+                                            class="btn fa fa-trash-o"
+                                            style="color: red; padding: 0px; margin-left: -6px; margin-top: 6px; margin-bottom: 15px;">
+                                       </a>
                                     </td>
                                 </tr>
                              </tbody>

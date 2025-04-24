@@ -5,9 +5,7 @@
     'depends': ['base','mail','sale','website'],
     'author': "San",
     'category': 'Category',
-    'description': """
-    Description text
-    """,
+    'description': """ Manage the students and activities of a school """,
     # data files always loaded at installation
     'data': [
         'security/school_user_groups.xml',
@@ -21,6 +19,7 @@
         'data/ir_cron_data.xml',
         'data/ir_action_data.xml',
         'data/portal_menu.xml',
+        'views/snippets/school_category_template.xml',
         'views/sale_order_view.xml',
         'views/registration_view.xml',
         'views/department_view.xml',
@@ -44,13 +43,13 @@
     'assets': {
         'web.assets_backend': [
             'school/static/src/js/action_manager.js',
+            # 'school/static/src/js/school_events.js',
         ],
         'web.assets_frontend': [
-            'school/static/src/js/school_website.js',
+            'school/static/src/js/school_events.js',
+            'school/static/src/xml/event_highlight_content.xml',
         ],
-        # 'web.assets_frontend_lazy': [
-        #     ('include', 'web.assets_frontend'),
-        # ],
+
     },
     'license': 'LGPL-3',
     'installable': True,

@@ -7,7 +7,7 @@
         <list>
             <field name = "name"/>
             <field name = "exm_class_id"/>
-            <field name = "paper"/>
+            <field name = "paper_ids"/>
         </list>
     </field>
 </record>
@@ -33,7 +33,7 @@
                     </page>
                      <page name="public" string="papers">
                         <div id="sub_details">
-                            <field name = "paper"/>
+                            <field name = "paper_ids"/>
                         </div>
                     </page>
                  </notebook>

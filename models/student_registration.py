@@ -2,7 +2,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 import re
-from datetime import datetime,date
+from datetime import date
 from dateutil.relativedelta import relativedelta
 
 
@@ -55,8 +55,7 @@ class StudentRegistration(models.Model):
     _sql_constraints = [
         ('field_unique',
          'unique(aadhar_no)',
-         'Choose another value - Aadhar_number is already exist!!!')
-    ]
+         'Choose another value - Aadhar_number is already exist!!!')]
 
     @api.model
     def create(self, vals):
@@ -94,12 +93,20 @@ class StudentRegistration(models.Model):
         """update attendance automatically"""
         today = fields.Date.today()
         student_id = self.search([])
+        leaves = self.env['school.leave'].search([
+            ('date_from', '<=', today),
+            ('date_to', '>=', today)
+        ])
+
+        leave_student_ids = set(leaves.mapped('student_id.id'))
+
         for student in student_id:
-            if self.env['school.leave'].search([('student_id', '=', student.id), ('date_from', '<=', today),
-                                                      ('date_to', '>=', today)]):
+            if student.id in leave_student_ids:
                 student.attendance = "absent"
             else:
-                student.attendance = "present"
+                student.attendance = "absent"
+                # student.attendance = "absent" if student.id in leave_student_ids else "present"
+
 
     @api.model
     def create_user(self):

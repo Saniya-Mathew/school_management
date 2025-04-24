@@ -12,4 +12,4 @@ class ManageClass(models.Model):
     cls_department_id = fields.Many2one('department',string="Department")
     company_id = fields.Many2one('res.company', string='School')
     hod_id = fields.Many2one(related='cls_department_id.hod_id')
-    stu_ids = fields.One2many('student.registration',inverse_name='class_id')
+    # stu_ids = fields.One2many('student.registration',inverse_name='class_id')
