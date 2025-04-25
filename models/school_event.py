@@ -13,6 +13,8 @@ class SchoolEvent(models.Model):
     club_id = fields.Many2one('school.club', string="Organizing Club")
     event_date = fields.Date(string="Event Date")
     active = fields.Boolean(default=True)
+    photo = fields.Binary("Event picture", attachment=True,
+                          help="This field holds the image used for registration")
 
     @api.onchange("event_date")
     def archive_record(self):

@@ -20,12 +20,15 @@
                        string="Send Email" class="oe_highlight"/>
            </header>
             <sheet>
-                 <group>
-                     <field name="name"/>
-                     <field name="club_id"/>
-                     <field name = "event_date"/>
-                     <field name="active" invisible="1"/>
-<!--                             eval="[('event_date', '<', 'datetime.today()')]"/>-->
+                <group>
+                     <group>
+                         <field name="name"/>
+                         <field name="photo"/>
+                         <field name="club_id"/>
+                         <field name = "event_date"/>
+                         <field name="active" invisible="1"/>
+                    </group>
+
                 </group>
         </sheet>
                 <chatter/>

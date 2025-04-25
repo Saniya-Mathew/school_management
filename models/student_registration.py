@@ -100,7 +100,7 @@ class StudentRegistration(models.Model):
             if student.id in student_leave:
                 student.attendance = "absent"
             else:
-                student.attendance = "absent"
+                student.attendance = "present"
 
     @api.model
     def create_user(self):

@@ -16,8 +16,13 @@ class StudentInform(models.TransientModel):
 
     def action_student_report(self):
         """printing student report based on some conditions"""
-        data=self.prepare_report_data()
-        return self.env.ref('school.action_report_student').report_action(self, data=data)
+        # data=self.prepare_report_data()
+        # return self.env.ref('school.action_report_student').report_action(self, data=data)
+        data = {
+            'class_id':self.class_id.id,
+            'dept_id' : self.class_id.id,
+            'club_id': self.club_id.id,
+        }
 
     def action_student_exel_report(self):
         """Printing exel report"""
