@@ -15,7 +15,7 @@ class SchoolLeave(models.Model):
     stu_class = fields.Integer(string="Class")
     date_from = fields.Date('Start Date', copy=False, default=fields.Date.context_today, )
     date_to = fields.Date('End Date', copy=False)
-    total_day = fields.Integer(string="Total number of days" , compute="_compute_total_day")
+    total_day = fields.Integer(string="Total number of days" , compute="_compute_total_day",store=True)
     half_day = fields.Integer(string="Half Day")
     reason = fields.Text(string="Reason")
 

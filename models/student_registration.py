@@ -48,8 +48,6 @@ class StudentRegistration(models.Model):
     attendance = fields.Selection(string='Attendance',
                                   selection=[('present', 'Present'),
                                              ('absent', 'Absent'), ])
-
-    stu_ids = fields.One2many('school.leave', 'student_id', string='Students')
     dept_id = fields.Many2one('department',string='Department')
 
     _sql_constraints = [
@@ -97,16 +95,12 @@ class StudentRegistration(models.Model):
             ('date_from', '<=', today),
             ('date_to', '>=', today)
         ])
-
-        leave_student_ids = set(leaves.mapped('student_id.id'))
-
+        student_leave = set(leaves.mapped('student_id.id'))
         for student in student_id:
-            if student.id in leave_student_ids:
+            if student.id in student_leave:
                 student.attendance = "absent"
             else:
                 student.attendance = "absent"
-                # student.attendance = "absent" if student.id in leave_student_ids else "present"
-
 
     @api.model
     def create_user(self):

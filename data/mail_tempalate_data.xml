@@ -4,8 +4,6 @@
            <field name="name">Event Reminder Email</field>
            <field name="model_id" ref="model_school_event"/>
            <field name="subject">Reminder</field>
-<!--           <field name="email_from">{{ 'self.user_id.email'}}</field>-->
-<!--           <field name="email_to">{{'self.partner_ids.email'}}</field>-->
            <field name="description">Add Description</field>
            <field name="body_html" type="html">
                <div>

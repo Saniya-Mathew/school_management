@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--Product Category tab content template-->
 <templates xml:space="preserve">
     <t t-name="school.category_data">
         <section class="categories_section">

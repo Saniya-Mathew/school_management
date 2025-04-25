@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import dateutil.utils
 from odoo import fields,models,api
-import datetime
-from datetime import date, timedelta ,datetime
+from datetime import  timedelta
 
 
 class SchoolEvent(models.Model):
