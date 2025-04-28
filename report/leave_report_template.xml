@@ -50,8 +50,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-if="data.get('report')">
-                                    <t t-foreach="data.get('report')" t-as="row">
+                                <t t-if="data.get('docs')">
+                                    <t t-foreach="data.get('docs')" t-as="row">
                                         <tr>
                                             <td><t t-esc="row_index + 1"/></td>
                                             <t t-if="not data.get('student name')">

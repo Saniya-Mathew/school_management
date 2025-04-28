@@ -13,18 +13,24 @@ class SchoolEvent(models.Model):
     club_id = fields.Many2one('school.club', string="Organizing Club")
     event_date = fields.Date(string="Event Date")
     active = fields.Boolean(default=True)
-    photo = fields.Binary("Event picture", attachment=True,
-                          help="This field holds the image used for registration")
+    image = fields.Binary("Event picture", attachment=True)
 
-    @api.onchange("event_date")
-    def archive_record(self):
+    def write(self, vals):
         """archiving the record"""
-        if self.event_date != 0:
-            today=fields.Date.today()
-            if self.search([('event_date', '<',today)]):
-                self.write({'active': False})
+        res= super().write(vals)
+        today=fields.Date.today()
+        for rec in self:
+            if rec.event_date and rec.event_date < today:
+                rec.action_archive()
             else:
-                self.write({'active': True})
+                rec.action_unarchive()
+        return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records.write({})
+        return records
 
     def action_send_mail(self):
         """button action to send email to all of the employee"""
