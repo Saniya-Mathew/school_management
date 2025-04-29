@@ -14,7 +14,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-if="docs.get('')">
+                                <t t-if="data.get('docs')">
                                     <t t-foreach="data.get('docs')" t-as="row">
                                         <tr>
                                              <td><t t-esc="row.get('f_name')"/></td>

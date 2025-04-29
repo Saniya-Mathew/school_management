@@ -14,12 +14,11 @@ class StudentInform(models.TransientModel):
     def action_student_report(self):
         """Button function to Print normal Qweb report"""
         data = {
-            'class_id': self.class_id.id,
+            'clas/school/static/src/img/arts day.jpegs_id': self.class_id.id,
             'dept_id': self.dept_id.id,
             'club_id': self.club_id.id,
-
         }
-        return self.env.ref('school.action_report_student').report_action(self, data=data)
+        return self.env.ref('school.action_report_student').report_action(self,data=data)
 
     def action_student_exel_report(self):
         """Button function to Print Excel report"""

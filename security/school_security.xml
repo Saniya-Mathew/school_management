@@ -29,7 +29,8 @@
              <record id="record_user_class" model="ir.rule">
             <field name="name">User can only see their own class</field>
             <field name="model_id" ref="model_class"/>
-            <field name="domain_force">[('stu_ids.email', '=', user.email)]</field>
+            <field name="domain_force">[(1, '=', 1)]</field>
+<!--            <field name="domain_force">[('stu_ids.email', '=', user.email)]</field>-->
             <field name="groups" eval="[(Command.link(ref('school_student_group')))]"/>
         </record>
 

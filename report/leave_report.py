@@ -10,8 +10,6 @@ class StudentReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        print(docids)
-        print(1)
         """filtering conditions"""
         query = """SELECT s.f_name,class_id,reg_no,date_from,date_to,reason FROM school_leave l
                              INNER JOIN student_registration s ON l.student_id = s.id """
@@ -43,6 +41,8 @@ class StudentReport(models.AbstractModel):
             'doc_model': 'school.leave',
             'docs': docs,
             'data': data,
+            'student name': ",".join(self.student_ids.mapped('f_name'))
+
         }
 
     def get_xlsx_report(self, data, response):

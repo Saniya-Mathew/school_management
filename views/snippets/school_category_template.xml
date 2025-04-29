@@ -14,9 +14,46 @@
     <template id="category_highlight_snippet" inherit_id="website.snippets"
               name="Category Highlight Snippet">
         <xpath expr="//snippets[@id='snippet_groups']" position="inside">
-            <t t-snippet="school.category_template_highlight"/>
-               t-thumbnail="/school/static/src/images/snippets/banner.jpg"/>
+            <t t-snippet="school.category_template_highlight"
+               t-thumbnail="/school/static/src/img/snippet_thumps/event_thump.svg"/>
         </xpath>
+    </template>
+
+    <template id="get_event_details_template">
+        <t t-call="website.layout">
+            <t t-set="title">School events<t t-esc="event.name"/></t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="container text-center">
+                        <h1 style="color: #714B67; margin-top: 20px"><t t-esc="event.name"/></h1>
+                    </div>
+                    <div class="row m-3 p-3">
+                        <div class="col-sm-6">
+                            <t t-if="event.image">
+                                <img t-att-src="image_data_uri(event.image)" alt="event Image"
+                                     class="img img-fluid oe_unmovable product_detail_img w-100"/>
+                            </t>
+                            <t t-else="">
+                                <img src="/school/static/src/img/image.jpeg"
+                                     alt="Default event Image"
+                                     class="img img-fluid oe_unmovable product_detail_img w-100"/>
+                            </t>
+                        </div>
+                        <div class="col-sm-6" style="padding:150px;">
+                            Organized By:
+                                <b><t t-esc="event.club_id.name"></t></b>
+                            <br></br>
+                            Scheduled On:
+                                <h3 style="color: #008000;">
+                                    <t t-esc="event.event_date"></t>
+                                </h3>
+                            <a href="/" class="btn btn-primary mt-3">Register now</a>
+                            <a href="/" class="btn btn-primary mt-3">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
     </template>
 </odoo>
 

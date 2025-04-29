@@ -2,7 +2,7 @@
     'name': "School Management",
     'version': '1.0',
     'type': 'module',
-    'depends': ['base','mail','sale','website'],
+    'depends': ['base','mail','sale'],
     'author': "San",
     'category': 'Category',
     'description': """ Manage the students and activities of a school """,
@@ -47,7 +47,7 @@
         ],
         'web.assets_frontend': [
             'school/static/src/js/school_events.js',
-            'school/static/src/xml/event_highlight_content.xml',
+            'school/static/src/xml/event_highlight_website.xml',
         ],
 
     },

@@ -37,14 +37,13 @@ class StudentLeaveInform(models.TransientModel):
 
     def action_print_exel_report(self):
         """Printing exel report"""
-        # data = self.prepare_report_data()
         data = {
             'student_ids': self.student_ids.ids,
             'date_from': self.date_from,
             'date_to': self.date_to,
             'class_id': self.class_id.id,
             'filter_by': self.filter_by,
-            'student name': ",".join(self.student_ids.mapped('f_name')),
+            'student name': ",".join(self.student_ids.mapped('f_name'))
         }
         return {
             'type': 'ir.actions.report',

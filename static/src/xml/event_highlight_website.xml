@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Event Category tab content template-->
+    <templates xml:space="preserve">
+        <t t-name="school.category_data">
+            <section class="categories_section">
+                <div class="container mt-3">
+                    <h3 class="section_heading" style="text-align: center;">School Events</h3>
+                    <p style="text-align: center;">___Here you can find all the latest Events___</p>
+                    <div t-attf-id="course_carousel{{unique}}" class="container carousel slide" style="padding-top:50px;"
+                         data-bs-ride="carousel" t-att-data-bs-interval="interval">
+                        <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                            <t t-foreach="event_chunks" t-as="chunk" t-key="chunk.id">
+                                <div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                                    <div class="row">
+                                        <t t-foreach="chunk" t-as="event" t-key="event.id">
+                                        <div class="block span3 col-3">
+                                            <div class="card-group">
+                                                <div class="card h-100 text-center p-2">
+                                                    <a t-attf-href="/get_event_details/{{ event.id }}">
+                                                        <t t-if="event.image">
+                                                            <img t-att-src="'data:image/png;base64,' + event.image"
+                                                                 class="card-img-top"
+                                                                 t-att-alt="event.name or 'event Image'"
+                                                                 loading="lazy" style="height: 165px;"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <img
+                                                                 class="card-img-top"
+                                                                 alt="Default event Image"
+                                                                 loading="lazy" style="height: 160px;"/>
+                                                        </t>
+                                                        <div class="card-body p-2">
+                                                            <b><h5 class="card-title" t-esc="event.name"/></b>
+                                                            <p class="card-text" style="text-align: left">
+                                                                <b><t t-esc="event.name"/></b>
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <a t-attf-href="#course_carousel{{unique}}" class="carousel-control-prev" data-bs-slide="prev"
+                                   role="button" aria-label="Previous" title="Previous">
+                                    <span class="fa fa-chevron-circle-left fa-2x" style="color:black"/>
+                                </a>
+                                <a t-attf-href="#course_carousel{{unique}}" class="carousel-control-next" data-bs-slide="next"
+                                   role="button" aria-label="Next" title="Next">
+                                    <span class="fa fa-chevron-circle-right fa-2x" style="color:black"/>
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </templates>
+
+
+<!--    <templates id = "event_inner_content" >-->
+<!--        <t t-name="school.category_data">-->
+<!--            <section class="categories_section">-->
+<!--                <div class="container mt-5">-->
+<!--                    <h3 class="section_heading">School Events</h3>-->
+<!--                    <div class="categories_wrapper">-->
+<!--                        <div class="block span3 col-6">-->
+<!--                            <div class="card-group" style = "width: 200px; height: 300px;">-->
+<!--                                <div class="card text-center p-2" >-->
+<!--                                    <t t-if="event.image">-->
+<!--                                        <img t-att-src="'data:image/png;base64,' + event.image"-->
+<!--                                         class="card-img-top"-->
+<!--                                         t-att-alt="event.name or 'Event Image'"-->
+<!--                                          style="height: 200px;"/>-->
+<!--                                    </t>-->
+<!--                                    <t t-else="">-->
+<!--                                        <img src="/school/static/src/img/images.jpeg"-->
+<!--                                         class="card-img-top"-->
+<!--                                         alt="Default event Image"-->
+<!--                                          style="height: 200px;"/>-->
+<!--                                    </t>-->
+<!--                                    <div class="type" style="padding-top: 15px">-->
+<!--                                        <t t-esc="event.name"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
+<!--        </t>-->
+<!--    </templates>-->

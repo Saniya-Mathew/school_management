@@ -10,3 +10,10 @@ class WebsiteEvent(http.Controller):
             'event': events,
         }
         return values
+
+    @http.route('/get_event_details/<int:student_id>', type='http', auth='public', website=True)
+    def get_event_details(self, student_id):
+        events = request.env['school.event'].sudo().browse(student_id)
+        return request.render('school.get_event_details_template', {
+            'event': events
+        })

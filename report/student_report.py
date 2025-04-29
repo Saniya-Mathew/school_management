@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import xlsxwriter
 import io
-from odoo import models,api
+from odoo import api,models,_
+from odoo.exceptions import UserError
 
 
 class StudentReport(models.AbstractModel):
@@ -20,12 +21,14 @@ class StudentReport(models.AbstractModel):
         if data.get('dept_id'):
             where_clause.append("s.dept_id = '%s'" % (data.get('dept_id')))
         if data.get('club_id'):
-            where_clause.append("rel.school_club_id ='%s'"(data.get('club_id')))
+            where_clause.append("rel.school_club_id ='%s'" % (data.get('club_id')))
         if where_clause:
             query += " WHERE " + " AND ".join(where_clause)
 
         self.env.cr.execute(query)
         docs = self.env.cr.dictfetchall()
+        # if not docs:
+        #     raise UserError(_("This report cannot be printed, There is no data!"))
         return {
             'doc_ids': docids,
             'doc_model': 'student.registration',
@@ -56,6 +59,8 @@ class StudentReport(models.AbstractModel):
 
         sheet.set_column(2, 2, 25)
         sheet.set_column(4, 4, 25)
+        report_data = self._get_report_values([], data)
+        docs = report_data.get('docs', [])
 
         sheet.write('C7', 'Student Name', cell_format)
         sheet.write('E7', 'Admission Date', cell_format)
