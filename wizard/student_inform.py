@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models
+from odoo.tools import json_default
+import json
 
 
 class StudentInform(models.TransientModel):
@@ -14,7 +16,7 @@ class StudentInform(models.TransientModel):
     def action_student_report(self):
         """Button function to Print normal Qweb report"""
         data = {
-            'clas/school/static/src/img/arts day.jpegs_id': self.class_id.id,
+            'class_id': self.class_id.id,
             'dept_id': self.dept_id.id,
             'club_id': self.club_id.id,
         }
@@ -29,7 +31,13 @@ class StudentInform(models.TransientModel):
         }
         return {
             'type': 'ir.actions.report',
-            'report_name': 'school.report_student_inform',
             'report_type': 'xlsx',
-            'data': data,
+            'data':
+                {
+                    'model': 'report.school.report_student_inform',
+                    'options': json.dumps(data, default=json_default),
+                    'output_format': 'xlsx',
+                    'report_name': 'Student Excel Report',
+                },
         }
+

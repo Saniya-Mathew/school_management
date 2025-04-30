@@ -14,11 +14,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-if="data.get('docs')">
-                                    <t t-foreach="data.get('docs')" t-as="row">
+                                <t t-if="docs">
+                                    <t t-foreach="docs" t-as="row">
                                         <tr>
-                                             <td><t t-esc="row.get('f_name')"/></td>
-                                             <td><t t-esc="row.get('date')"/></td>
+                                             <td><t t-esc="row['f_name']"/></td>
+                                             <td><t t-esc="row['date']"/></td>
                                         </tr>
                                     </t>
                                 </t>

@@ -41,7 +41,7 @@ class StudentReport(models.AbstractModel):
             'doc_model': 'school.leave',
             'docs': docs,
             'data': data,
-            'student name': ",".join(self.student_ids.mapped('f_name'))
+            # 'student name': ",".join(self.student_ids.mapped('f_name'))
 
         }
 
@@ -74,7 +74,6 @@ class StudentReport(models.AbstractModel):
         sheet.set_column(4, 4, 25)
         sheet.set_column(5, 5, 25)
         sheet.set_column(6, 6, 25)
-
         report_data = self._get_report_values([], data)
         docs = report_data.get('docs', [])
 

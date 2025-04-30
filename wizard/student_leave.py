@@ -47,11 +47,14 @@ class StudentLeaveInform(models.TransientModel):
         }
         return {
             'type': 'ir.actions.report',
-            'data': {'model': 'student.leave.inform',
-                     'options': json.dumps(data,default=json_default),
-                     'output_format': 'xlsx',
-                     'report_name': 'Leave Excel Report',
-                     },
             'report_type': 'xlsx',
+            'data':
+                {
+                    'model': 'report.school.report_student',
+                    'options': json.dumps(data, default=json_default),
+                    'output_format': 'xlsx',
+                    'report_name': 'leave Excel Report',
+                },
         }
+
 

@@ -130,3 +130,6 @@ class CustomWebsite(http.Controller):
         return request.render('school.web_event_template', {
             'event': events
         })
+
+
+

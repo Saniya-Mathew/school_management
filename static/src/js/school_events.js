@@ -17,7 +17,7 @@ publicWidget.registry.get_event_tab = publicWidget.Widget.extend({
         if(result && result.event){
             const chunks = chunkArray(result.event, 4);
             chunks[0].is_active = true
-            cont unique =Date.now()
+            const unique =Date.now()
             this.$target.empty().html(renderToElement('school.category_data', {
                 event_chunks: chunks,
                 unique: unique,
@@ -26,22 +26,3 @@ publicWidget.registry.get_event_tab = publicWidget.Widget.extend({
     },
 });
 
-//publicWidget.registry.get_event_tab = publicWidget.Widget.extend({
-//    selector : '.categories_section',
-//    async willStart() {
-//        const result = await rpc('/get_event_categories', {});
-//        if(result){
-//            this.$target.empty().html(renderToElement('school.category_data', {result: result}))
-//        }
-//    },
-////    start: function() {
-////        var chunks = .chunk(this.data, 4)
-////        chunks[0].is_active = true
-////        this.$el.find('#courosel').html(
-////        qweb.render('school.category_data', {
-////        chunks
-////        }))
-////    },
-//});
-//
-//

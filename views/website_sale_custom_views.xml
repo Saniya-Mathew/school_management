@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="my_custom_products" inherit_id="website_sale.products">
+                <!-- Your modifications go here -->
+    </template>
+</odoo>

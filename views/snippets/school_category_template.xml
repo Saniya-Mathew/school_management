@@ -4,8 +4,7 @@
         <section class="categories_section">
             <div class="container">
                 <div class="alert alert-info">
-                    <h4>School Events
-                    </h4>
+                    <h4>School Events</h4>
                 </div>
             </div>
         </section>
@@ -15,7 +14,7 @@
               name="Category Highlight Snippet">
         <xpath expr="//snippets[@id='snippet_groups']" position="inside">
             <t t-snippet="school.category_template_highlight"
-               t-thumbnail="/school/static/src/img/snippet_thumps/event_thump.svg"/>
+               t-thumbnail="/school/static/src/img/snippet_thumps/evnt_quote.svg"/>
         </xpath>
     </template>
 

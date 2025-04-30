@@ -16,7 +16,7 @@
                                         <div class="block span3 col-3">
                                             <div class="card-group">
                                                 <div class="card h-100 text-center p-2">
-                                                    <a t-attf-href="/get_event_details/{{ event.id }}">
+                                                    <a t-attf-href="/get_event_details/{{ event.id }}" class="btn btn-secondary">
                                                         <t t-if="event.image">
                                                             <img t-att-src="'data:image/png;base64,' + event.image"
                                                                  class="card-img-top"
@@ -32,7 +32,7 @@
                                                         <div class="card-body p-2">
                                                             <b><h5 class="card-title" t-esc="event.name"/></b>
                                                             <p class="card-text" style="text-align: left">
-                                                                <b><t t-esc="event.name"/></b>
+<!--                                                                <b><t t-esc="event.name"/></b>-->
                                                             </p>
                                                         </div>
                                                     </a>

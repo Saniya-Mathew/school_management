@@ -25,16 +25,19 @@ class StudentReport(models.AbstractModel):
         if where_clause:
             query += " WHERE " + " AND ".join(where_clause)
 
+        print(query)
         self.env.cr.execute(query)
         docs = self.env.cr.dictfetchall()
-        # if not docs:
-        #     raise UserError(_("This report cannot be printed, There is no data!"))
-        return {
-            'doc_ids': docids,
-            'doc_model': 'student.registration',
-            'docs': docs,
-            'data': data,
-        }
+        print(docs)
+        if docs:
+            return {
+                'doc_ids': docids,
+                'doc_model': 'student.registration',
+                'docs': docs,
+                'data': data,
+            }
+        else:
+            raise UserError(_("""No Data\n"""))
 
     @api.model
     def get_xlsx_report(self, data, response):
@@ -43,29 +46,29 @@ class StudentReport(models.AbstractModel):
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         sheet = workbook.add_worksheet()
 
-
         cell_format = workbook.add_format({'font_size': '12px', 'align': 'center', 'bold': True})
         head_format = workbook.add_format({'align': 'center', 'bold': True, 'font_size': '20px'})
         txt_format = workbook.add_format({'font_size': '10px', 'align': 'center'})
-        wrap_format = workbook.add_format({'text_wrap': True, 'font_size': '8px', 'align': 'center', 'bold': True})
+        wrap_format = workbook.add_format({'text_wrap': True, 'font_size': '6px', 'align': 'center','bold': True})
 
         sheet.merge_range('C2:E4', 'STUDENT REPORT', head_format)
-        company = self.env.company
-        company_info = f"""{company.name or ''}
-            {company.street or ''} {company.street2 or ''}
-            {company.city or ''} {company.state_id.name or ''}
-            {company.country_id.name or ''}"""
-        sheet.merge_range('A2:B5', company_info, wrap_format)
 
+        company = self.env.company
+        company_info = f"""{company.name}
+        {company.street or ''} {company.street2 or ''}
+        {company.city or ''} {company.state_id.name or ''}
+        {company.country_id.name or ''}"""
+        sheet.merge_range('B2:B4', company_info, wrap_format)
+
+        sheet.set_column(1, 1, 25)
         sheet.set_column(2, 2, 25)
         sheet.set_column(4, 4, 25)
+
         report_data = self._get_report_values([], data)
         docs = report_data.get('docs', [])
-
         sheet.write('C7', 'Student Name', cell_format)
         sheet.write('E7', 'Admission Date', cell_format)
-
-        for i, student in enumerate(data.get('report_data', []), start=9):
+        for i, student in enumerate(docs, start=9):
             sheet.write(f'C{i}', student.get('f_name'), txt_format)
             sheet.write(f'E{i}', student.get('date'), txt_format)
 

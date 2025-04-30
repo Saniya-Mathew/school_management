@@ -11,3 +11,8 @@ class ResPartner(models.Model):
                               selection=[('teacher', 'Teacher'),
                                          ('office staff', 'Office Staff'),
                                          ('student', 'Student')], )
+    allowed_products = fields.Selection(string='Allowed Products',
+                              selection=[('product', 'Product'),
+                                         ('product_categories', 'Product Categories '),], )
+    product_ids = fields.Many2many('product.product' ,string="Product")
+    product_category_ids = fields.Many2many('product.category',string='Product Category')
