@@ -1,13 +1,14 @@
 from addons.website_sale.controllers.main import WebsiteSale
-from odoo.http import request, route
+from odoo.http import request
 from odoo import http
 
 
-class WebsiteSale(WebsiteSale):
+class WebsiteSaleCustom(WebsiteSale):
     print(100)
     @http.route(['/shop'], type='http', auth="user", website=True, sitemap=True)
     def shop(self, page=0, category=None, search='', **post):
-        print("hiiii")
+        print("hi")
+        # result = WebsiteSale().shop(page=page, category=category, search=search, **post)
         result = super().shop(page=page, category=category, search=search, **post)
 
         user = request.env.user
