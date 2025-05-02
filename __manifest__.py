@@ -2,7 +2,7 @@
     'name': "School Management",
     'version': '1.0',
     'type': 'module',
-    'depends': ['base','mail','sale','website',],
+    'depends': ['base','mail','sale','website', 'website_sale',],
     'author': "San",
     'category': 'Category',
     'description': """ Manage the students and activities of a school """,
